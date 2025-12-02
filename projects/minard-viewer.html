@@ -6,6 +6,10 @@
     <title>Minard's Napoleon March | Nikhil Kumar Korrapati</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <style>
         .project-detail {
             min-height: 100vh;
@@ -129,6 +133,53 @@
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .viz-container {
+            width: 100%;
+            height: 600px;
+            margin: 2rem 0;
+        }
+        .tab-navigation {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: var(--dark-card);
+            color: var(--text-secondary);
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .tab-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+        .tab-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -144,87 +195,64 @@
             </div>
 
             <div class="notebook-container">
-                <h2 style="color: var(--text-primary); margin-bottom: 1.5rem;">Project Overview</h2>
+                <h2 style="color: var(--text-primary); margin-bottom: 1.5rem;">Interactive Visualizations</h2>
                 
-                <div class="notebook-preview">
-                    <h2>Modern Perspectives on Minard's Russian Campaign Visualization</h2>
-                    
-                    <p>I have reinterpreted Minard's renowned 1869 map of Napoleon's Russian campaign using five contemporary visualization approaches. Each method offers a unique lens for exploring the data, making the historical narrative more accessible and engaging.</p>
+                <div class="highlight-box">
+                    <h4><i class="fas fa-lightbulb"></i> Key Innovation</h4>
+                    <p>While Minard's original map presented a single, powerful narrative, these modern visualizations empower you to interact with the data, explore multiple perspectives, and uncover new insights about this pivotal historical event.</p>
+                </div>
 
-                    <div class="highlight-box">
-                        <h4><i class="fas fa-lightbulb"></i> Key Innovation</h4>
-                        <p>While Minard's original map presented a single, powerful narrative, my modern visualizations empower you to interact with the data, explore multiple perspectives, and uncover new insights about this pivotal historical event.</p>
-                    </div>
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active" onclick="showTab('map')">
+                        <i class="fas fa-map-marked-alt"></i> Interactive Map
+                    </button>
+                    <button class="tab-btn" onclick="showTab('dashboard')">
+                        <i class="fas fa-chart-bar"></i> Dashboard
+                    </button>
+                    <button class="tab-btn" onclick="showTab('temperature')">
+                        <i class="fas fa-temperature-low"></i> Temperature Analysis
+                    </button>
+                    <button class="tab-btn" onclick="showTab('simplified')">
+                        <i class="fas fa-dot-circle"></i> Simplified View
+                    </button>
+                </div>
 
-                    <h3 style="color: #333; margin-top: 2rem;">Five Visualization Approaches:</h3>
-                    
-                    <div class="visualization-grid">
-                        <div class="viz-card">
-                            <h3>1. Interactive Geographic Map (Folium)</h3>
-                            <div class="viz-description">
-                                <p><strong>Features:</strong></p>
-                                <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                                    <li>Navigate the campaign route with interactive zoom and pan</li>
-                                    <li>Click on locations for detailed information about the army's progress</li>
-                                    <li>Color-coded paths: Red (advance) vs. Black (retreat)</li>
-                                    <li>Line width encoding representing army size</li>
-                                    <li>Multi-layer display with cities, rivers, and routes</li>
-                                </ul>
-                            </div>
-                        </div>
+                <!-- Tab 1: Interactive Map -->
+                <div id="map-tab" class="tab-content active">
+                    <h3 style="color: var(--text-primary);">1. Interactive Geographic Map</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        Navigate the campaign route with interactive zoom and pan features. Click on locations for detailed information.
+                    </p>
+                    <div id="map" class="loading">Loading map data...</div>
+                </div>
 
-                        <div class="viz-card">
-                            <h3>2. Analytical Dashboards (Plotly)</h3>
-                            <div class="viz-description">
-                                <p><strong>Features:</strong></p>
-                                <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                                    <li>Interactive charts for troop losses and temperature changes</li>
-                                    <li>Group survival rate comparisons</li>
-                                    <li>Deep analysis capabilities with hover information</li>
-                                    <li>Temporal progression visualization</li>
-                                </ul>
-                            </div>
-                        </div>
+                <!-- Tab 2: Analytical Dashboard -->
+                <div id="dashboard-tab" class="tab-content">
+                    <h3 style="color: var(--text-primary);">2. Analytical Dashboard</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        Comprehensive analysis of troop losses, temperature changes, and group survival rates.
+                    </p>
+                    <div id="dashboard" class="viz-container loading">Loading dashboard...</div>
+                </div>
 
-                        <div class="viz-card">
-                            <h3>3. Environmental Impact Analysis</h3>
-                            <div class="viz-description">
-                                <p><strong>Features:</strong></p>
-                                <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                                    <li>Direct correlation between temperature drops and casualties</li>
-                                    <li>Highlighting the critical role of harsh weather</li>
-                                    <li>Dual-axis charts showing temperature and troop strength</li>
-                                    <li>Statistical analysis of environmental factors</li>
-                                </ul>
-                            </div>
-                        </div>
+                <!-- Tab 3: Temperature Analysis -->
+                <div id="temperature-tab" class="tab-content">
+                    <h3 style="color: var(--text-primary);">3. Temperature Impact Analysis</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        Visualize the direct relationship between temperature drops and army losses.
+                    </p>
+                    <div id="temperature" class="viz-container loading">Loading temperature analysis...</div>
+                    <div id="temperature-timeline" class="viz-container loading">Loading temperature timeline...</div>
+                </div>
 
-                        <div class="viz-card">
-                            <h3>4. Simplified Campaign Map</h3>
-                            <div class="viz-description">
-                                <p><strong>Features:</strong></p>
-                                <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                                    <li>Quick pattern and trend identification</li>
-                                    <li>Colored dots representing army positions and sizes</li>
-                                    <li>Clean, minimalist design for clarity</li>
-                                    <li>Key point visualization along the route</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="viz-card">
-                            <h3>5. 3D Spatial Visualization</h3>
-                            <div class="viz-description">
-                                <p><strong>Features:</strong></p>
-                                <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                                    <li>Experience campaign scale in three dimensions</li>
-                                    <li>Army size rendered as explorable landscape</li>
-                                    <li>Rotate and zoom for spatial understanding</li>
-                                    <li>Enhanced depth perception of the tragedy</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Tab 4: Simplified Map -->
+                <div id="simplified-tab" class="tab-content">
+                    <h3 style="color: var(--text-primary);">4. Simplified Campaign Map</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                        Quick pattern identification using colored dots representing army positions and sizes.
+                    </p>
+                    <div id="simplified" class="viz-container loading">Loading simplified view...</div>
                 </div>
 
                 <div class="cta-buttons">
@@ -233,9 +261,6 @@
                     </a>
                     <a href="https://github.com/NikhilKumarKorrapati/Data-viz/blob/main/Assignments/Minard/Minard.ipynb" class="btn-notebook secondary" target="_blank">
                         <i class="fab fa-github"></i> View on GitHub
-                    </a>
-                    <a href="https://nbviewer.org/github/NikhilKumarKorrapati/Data-viz/blob/main/Assignments/Minard/Minard.ipynb" class="btn-notebook secondary" target="_blank">
-                        <i class="fas fa-eye"></i> View in NBViewer
                     </a>
                 </div>
             </div>
@@ -307,5 +332,326 @@
     </div>
 
     <script src="../assets/js/script.js"></script>
+    <script>
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Load visualization if not loaded yet
+            if (tabName === 'map' && !window.mapLoaded) {
+                loadMap();
+            } else if (tabName === 'dashboard' && !window.dashboardLoaded) {
+                loadDashboard();
+            } else if (tabName === 'temperature' && !window.temperatureLoaded) {
+                loadTemperature();
+            } else if (tabName === 'simplified' && !window.simplifiedLoaded) {
+                loadSimplified();
+            }
+        }
+
+        // Load CSV data
+        let troopsData, citiesData, tempData, riversData;
+
+        async function loadAllData() {
+            try {
+                const [troops, cities, temp, rivers] = await Promise.all([
+                    fetch('../Assignments/Minard/data/minard-troops.csv').then(r => r.text()),
+                    fetch('../Assignments/Minard/data/minard-cities.csv').then(r => r.text()),
+                    fetch('../Assignments/Minard/data/minard-temp.csv').then(r => r.text()),
+                    fetch('../Assignments/Minard/data/minard-rivers.csv').then(r => r.text())
+                ]);
+
+                troopsData = Papa.parse(troops, { header: true, dynamicTyping: true }).data;
+                citiesData = Papa.parse(cities, { header: true, dynamicTyping: true }).data;
+                tempData = Papa.parse(temp, { header: true, dynamicTyping: true }).data;
+                riversData = Papa.parse(rivers, { header: true, dynamicTyping: true }).data;
+
+                // Load first visualization
+                loadMap();
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        // Interactive Map with Leaflet
+        function loadMap() {
+            if (window.mapLoaded) return;
+            window.mapLoaded = true;
+
+            const centerLat = troopsData.reduce((sum, d) => sum + d.lat, 0) / troopsData.length;
+            const centerLon = troopsData.reduce((sum, d) => sum + d.long, 0) / troopsData.length;
+
+            const map = L.map('map').setView([centerLat, centerLon], 6);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            const colors = { 'Advance': '#FF0000', 'Retreat': '#000000' };
+
+            // Group data by group and direction
+            const groupedData = {};
+            troopsData.forEach(row => {
+                const key = `${row.group}-${row.direction}`;
+                if (!groupedData[key]) groupedData[key] = [];
+                groupedData[key].push(row);
+            });
+
+            // Draw paths
+            Object.entries(groupedData).forEach(([key, data]) => {
+                const [group, direction] = key.split('-');
+                const coords = data.map(d => [d.lat, d.long]);
+                const avgSurvivors = data.reduce((sum, d) => sum + d.survivors, 0) / data.length;
+                const lineWidth = Math.max(2, Math.min(20, avgSurvivors / 10000));
+
+                L.polyline(coords, {
+                    color: colors[direction],
+                    weight: lineWidth,
+                    opacity: 0.8
+                }).bindPopup(`Group ${group} - ${direction}<br>Avg Survivors: ${Math.round(avgSurvivors).toLocaleString()}`)
+                  .addTo(map);
+            });
+
+            // Add city markers
+            citiesData.filter(c => c.city).forEach(city => {
+                L.circleMarker([city.lat, city.long], {
+                    radius: 8,
+                    fillColor: 'yellow',
+                    color: 'red',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.7
+                }).bindPopup(`<b>${city.city}</b><br>Survivors: ${city.survivors.toLocaleString()}`)
+                  .addTo(map);
+            });
+
+            // Add rivers
+            const riverGroups = {};
+            riversData.forEach(r => {
+                if (!riverGroups[r.name]) riverGroups[r.name] = [];
+                riverGroups[r.name].push([r.lat, r.long]);
+            });
+
+            Object.entries(riverGroups).forEach(([name, coords]) => {
+                if (coords.length > 1) {
+                    L.polyline(coords, {
+                        color: '#87CEFA',
+                        weight: 4,
+                        opacity: 0.7
+                    }).bindPopup(`${name} River`).addTo(map);
+                }
+            });
+
+            document.getElementById('map').classList.remove('loading');
+        }
+
+        // Dashboard
+        function loadDashboard() {
+            if (window.dashboardLoaded) return;
+            window.dashboardLoaded = true;
+
+            // Calculate losses by city
+            const cityLosses = [];
+            const namedCities = citiesData.filter(c => c.city);
+            
+            for (let i = 0; i < namedCities.length; i++) {
+                const city = namedCities[i];
+                const prevSurvivors = i > 0 ? namedCities[i-1].survivors : city.survivors;
+                const losses = Math.max(0, prevSurvivors - city.survivors);
+                cityLosses.push({
+                    city: city.city,
+                    losses: losses,
+                    survivors: city.survivors
+                });
+            }
+
+            cityLosses.sort((a, b) => b.losses - a.losses);
+
+            // Temperature data
+            const tempClean = tempData.filter(t => t.temp !== null && t.temp !== undefined);
+
+            // Group losses
+            const groupLosses = [];
+            const groups = [...new Set(troopsData.map(d => d.group))];
+            groups.forEach(group => {
+                const groupData = troopsData.filter(d => d.group === group);
+                const advance = groupData.filter(d => d.direction === 'Advance');
+                const retreat = groupData.filter(d => d.direction === 'Retreat');
+                
+                const startSize = advance.length > 0 ? Math.max(...advance.map(d => d.survivors)) : 0;
+                const endSize = retreat.length > 0 ? Math.min(...retreat.map(d => d.survivors)) : startSize;
+                
+                groupLosses.push({
+                    group: `Group ${group}`,
+                    start: startSize,
+                    end: endSize,
+                    losses: startSize - endSize
+                });
+            });
+
+            const trace1 = {
+                x: cityLosses.map(c => c.city),
+                y: cityLosses.map(c => c.losses),
+                type: 'bar',
+                name: 'Troop Losses',
+                marker: { color: 'crimson' }
+            };
+
+            const trace2 = {
+                x: tempClean.map(t => t.date),
+                y: tempClean.map(t => t.temp),
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: 'Temperature',
+                line: { color: 'blue', width: 4 },
+                marker: { size: 15 }
+            };
+
+            const trace3 = {
+                x: groupLosses.map(g => g.group),
+                y: groupLosses.map(g => g.losses),
+                type: 'bar',
+                name: 'Group Losses',
+                marker: { color: ['#FF6B6B', '#4ECDC4', '#45B7D1'] }
+            };
+
+            const layout = {
+                title: "Napoleon's 1812 Campaign - Comprehensive Analysis",
+                grid: { rows: 3, columns: 1, pattern: 'independent' },
+                height: 1200,
+                showlegend: false,
+                paper_bgcolor: '#1a1a2e',
+                plot_bgcolor: '#1a1a2e',
+                font: { color: '#e0e0e0' }
+            };
+
+            Plotly.newPlot('dashboard', [trace1, trace2, trace3], layout);
+            document.getElementById('dashboard').classList.remove('loading');
+        }
+
+        // Temperature Analysis
+        function loadTemperature() {
+            if (window.temperatureLoaded) return;
+            window.temperatureLoaded = true;
+
+            const tempClean = tempData.filter(t => t.temp !== null && t.temp !== undefined);
+            const retreat = troopsData.filter(d => d.direction === 'Retreat');
+
+            // Correlation
+            const correlationPoints = [];
+            tempClean.forEach(temp => {
+                const closest = retreat.reduce((prev, curr) => 
+                    Math.abs(curr.long - temp.long) < Math.abs(prev.long - temp.long) ? curr : prev
+                );
+                correlationPoints.push({
+                    temp: temp.temp,
+                    army: closest.survivors
+                });
+            });
+
+            const trace1 = {
+                x: correlationPoints.map(p => p.temp),
+                y: correlationPoints.map(p => p.army),
+                mode: 'markers',
+                type: 'scatter',
+                marker: { size: 16, color: 'crimson', line: { width: 2, color: 'black' } }
+            };
+
+            const layout1 = {
+                title: 'Temperature vs Army Strength',
+                xaxis: { title: 'Temperature (°C)' },
+                yaxis: { title: 'Army Size' },
+                height: 600,
+                paper_bgcolor: '#1a1a2e',
+                plot_bgcolor: '#1a1a2e',
+                font: { color: '#e0e0e0' }
+            };
+
+            Plotly.newPlot('temperature', [trace1], layout1);
+
+            // Timeline
+            const trace2 = {
+                x: tempClean.map(t => t.date),
+                y: tempClean.map(t => t.temp),
+                mode: 'lines+markers',
+                type: 'scatter',
+                line: { color: 'blue', width: 4 },
+                marker: { size: 15, color: 'blue' }
+            };
+
+            const layout2 = {
+                title: 'Temperature Timeline',
+                xaxis: { title: 'Date' },
+                yaxis: { title: 'Temperature (°C)' },
+                height: 600,
+                paper_bgcolor: '#1a1a2e',
+                plot_bgcolor: '#1a1a2e',
+                font: { color: '#e0e0e0' },
+                shapes: [
+                    { type: 'line', x0: 0, x1: 1, xref: 'paper', y0: 0, y1: 0, line: { dash: 'dash', color: 'gray' } },
+                    { type: 'line', x0: 0, x1: 1, xref: 'paper', y0: -10, y1: -10, line: { dash: 'dash', color: 'orange' } },
+                    { type: 'line', x0: 0, x1: 1, xref: 'paper', y0: -20, y1: -20, line: { dash: 'dash', color: 'red' } }
+                ]
+            };
+
+            Plotly.newPlot('temperature-timeline', [trace2], layout2);
+            document.getElementById('temperature').classList.remove('loading');
+            document.getElementById('temperature-timeline').classList.remove('loading');
+        }
+
+        // Simplified View
+        function loadSimplified() {
+            if (window.simplifiedLoaded) return;
+            window.simplifiedLoaded = true;
+
+            const namedCities = citiesData.filter(c => c.city);
+
+            const trace = {
+                type: 'scattergeo',
+                lon: namedCities.map(c => c.long),
+                lat: namedCities.map(c => c.lat),
+                text: namedCities.map(c => c.city),
+                marker: {
+                    size: namedCities.map(c => Math.sqrt(c.survivors) / 30),
+                    color: namedCities.map(c => c.direction === 'Advance' ? 'red' : 'black'),
+                    line: { color: 'white', width: 2 }
+                },
+                mode: 'markers'
+            };
+
+            const layout = {
+                title: "Minard's Campaign Map - Simplified View",
+                geo: {
+                    scope: 'europe',
+                    projection: { type: 'equirectangular' },
+                    showland: true,
+                    landcolor: 'rgb(243, 243, 243)',
+                    coastlinecolor: 'rgb(204, 204, 204)',
+                    countrycolor: 'rgb(204, 204, 204)',
+                    center: { lon: 30, lat: 55 },
+                    lonaxis: { range: [20, 40] },
+                    lataxis: { range: [50, 60] }
+                },
+                height: 600,
+                paper_bgcolor: '#1a1a2e',
+                font: { color: '#e0e0e0' }
+            };
+
+            Plotly.newPlot('simplified', [trace], layout);
+            document.getElementById('simplified').classList.remove('loading');
+        }
+
+        // Initialize
+        window.addEventListener('load', loadAllData);
+    </script>
 </body>
 </html>
