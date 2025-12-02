@@ -20,114 +20,146 @@
                 <span class="nav__bar"></span>
             </button>
             <ul class="nav__links">
+                <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#insights">Dashboards</a></li>
-                <li><a href="#process">Process</a></li>
+                <li><a href="#assignments">Assignments</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
         <section class="hero">
             <div class="hero__copy">
-                <p class="eyebrow">Data Visualization & Analytics Portfolio</p>
-                <h1>Transforming complex datasets into human stories.</h1>
-                <p class="hero__lead">Hi, I’m Nikhil — an analytics specialist with a passion for clear storytelling, insightful dashboards, and design that makes data meaningful.</p>
+                <p class="eyebrow">Analytics Storyteller</p>
+                <h1>From pipelines to boardroom narratives.</h1>
+                <p class="hero__lead">I am Nikhil Kumar Korrapati — building modern data stacks, leading analysis, and crafting visuals that move decisions forward.</p>
                 <div class="hero__actions">
-                    <a class="btn btn--primary" href="#projects">Explore portfolio</a>
-                    <a class="btn btn--ghost" href="Assignments/Minard/Minard.ipynb" target="_blank" rel="noopener">View latest notebook</a>
+                    <a class="btn btn--primary" href="#projects">See the work</a>
+                    <a class="btn btn--ghost" href="README.md" target="_blank" rel="noopener">Portfolio notes</a>
                 </div>
             </div>
             <div class="hero__viz">
-                <canvas id="heroChart" aria-label="Hero chart visualizing project impact" role="img"></canvas>
+                <canvas id="heroChart" aria-label="Skill radar showing focus areas" role="img"></canvas>
             </div>
         </section>
     </header>
 
     <main>
+        <section class="section" id="about">
+            <div class="section__heading">
+                <h2>About Me</h2>
+                <p>I am a data engineer by trade and a business analytics leader in the making. Snowflake, Azure Data Factory, and Apache Airflow power my pipelines; a part-time Master’s in Business Analytics and AI is sharpening the storytelling that follows.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>What Drives Me</h3>
+                    <p>Each project starts with an executive question and ends with a narrative asset: dashboards that invite action, notebooks that explain the path, and documentation that equips teams to iterate.</p>
+                </div>
+                <div class="about-card">
+                    <h3>How I Work</h3>
+                    <p>Blend human-centered research, prototyping, and analytics best practices. Discover, design, develop, and deliver — aligning stakeholders at every milestone.</p>
+                </div>
+            </div>
+        </section>
+
         <section class="section section--projects" id="projects">
             <div class="section__heading">
-                <h2>Selected Projects</h2>
-                <p>A sampling of analytics, dashboards, and storytelling work. Each project blends visual design with practical insights.</p>
+                <h2>Spotlight Visualizations</h2>
+                <p>A mix of assignments and exploratory work that reflect the curated journey documented in the repository README.</p>
             </div>
             <div class="projects-grid" id="projectGrid" aria-live="polite"></div>
         </section>
 
         <section class="section section--insights" id="insights">
             <div class="section__heading">
-                <h2>Interactive Dashboards</h2>
-                <p>Quick snapshots from my sandbox of reusable chart templates and insight-first dashboards.</p>
+                <h2>Analytics Snapshots</h2>
+                <p>Charts built from portfolio assets to highlight how insights flow from raw data to narrative-ready views.</p>
             </div>
             <div class="insights-grid">
                 <article class="insight-card">
                     <header>
-                        <h3>Campaign Reach vs. Attrition</h3>
-                        <p>Inspired by Charles Minard’s visualization — tracking troop counts alongside temperature to highlight attrition patterns.</p>
+                        <h3>Minard Attrition Story</h3>
+                        <p>Troop strength and temperature aligned using the exact CSVs from the Minard notebook.</p>
                     </header>
                     <canvas id="minardChart" height="220"></canvas>
                 </article>
                 <article class="insight-card">
                     <header>
-                        <h3>Monthly Revenue Trajectory</h3>
-                        <p>Forecasting pipeline growth with rolling averages and contribution by channel.</p>
+                        <h3>Pipeline → Insight Coverage</h3>
+                        <p>Mapping time investment across my core practice areas from the README toolkit.</p>
                     </header>
-                    <canvas id="revenueChart" height="220"></canvas>
+                    <canvas id="coverageChart" height="220"></canvas>
                 </article>
                 <article class="insight-card">
                     <header>
-                        <h3>Segment Conversion Funnel</h3>
-                        <p>Comparing conversion efficiencies by customer segment to prioritize targeting strategies.</p>
+                        <h3>Story Formats in Focus</h3>
+                        <p>Relative emphasis on the narrative formats I love to build.</p>
                     </header>
-                    <canvas id="conversionChart" height="220"></canvas>
+                    <canvas id="formatsChart" height="220"></canvas>
                 </article>
             </div>
         </section>
 
-        <section class="section section--process" id="process">
+        <section class="section section--stories">
             <div class="section__heading">
-                <h2>Analytical Process</h2>
-                <p>Every engagement runs through a human-centered, insight-driven framework.</p>
+                <h2>Visual Storylines</h2>
+                <p>Handed off as dashboards, scrollytelling pieces, or scenario comparisons — depending on stakeholder needs.</p>
             </div>
-            <ol class="process-list">
-                <li>
-                    <h3>Discover</h3>
-                    <p>Understand the business challenge, stakeholders, and success metrics. Audit available data and constraints.</p>
-                </li>
-                <li>
-                    <h3>Design</h3>
-                    <p>Prototype visual narratives using sketches, storyboards, and low-fidelity dashboards to align expectations.</p>
-                </li>
-                <li>
-                    <h3>Develop</h3>
-                    <p>Build clean data pipelines, analytical models, and responsive visualizations using Python, SQL, and modern JS libraries.</p>
-                </li>
-                <li>
-                    <h3>Deliver</h3>
-                    <p>Ship actionable insights with documentation, embed-ready dashboards, and iteration paths for continuous improvement.</p>
-                </li>
-            </ol>
+            <ul class="storyline-list">
+                <li><strong>Decision-ready dashboards</strong> blending trend cards, anomaly callouts, and what-if toggles for leadership forums.</li>
+                <li><strong>Narrative scrollytelling</strong> that walks readers from context to insight to action on a single page.</li>
+                <li><strong>Comparative visuals</strong> that unpack how policy, process, or product changes ripple through customer behavior.</li>
+            </ul>
         </section>
 
         <section class="section section--testimonials">
             <div class="section__heading">
-                <h2>Toolkit & Highlights</h2>
-                <p>A blend of data, design, and delivery skills to drive impact end-to-end.</p>
+                <h2>Toolbox</h2>
+                <p>Pipelines, analytics, and enablement disciplines that anchor the portfolio.</p>
             </div>
             <div class="highlight-grid">
                 <div class="highlight-card">
-                    <h3>Data Engineering</h3>
-                    <p>Experienced with Python, pandas, SQL, dbt, and APIs to wrangle datasets into analysis-ready structures.</p>
+                    <h3>Pipelines & Platforms</h3>
+                    <p>Snowflake, Azure Data Factory, Apache Airflow, dbt (exploratory).</p>
                 </div>
                 <div class="highlight-card">
-                    <h3>Visualization Craft</h3>
-                    <p>Story-driven dashboards in Tableau, Power BI, Plotly, and D3.js with practical accessibility considerations.</p>
+                    <h3>Analytics & Visualization</h3>
+                    <p>Python, Pandas, Altair, Plotly, Power BI, with an emphasis on reproducibility.</p>
                 </div>
                 <div class="highlight-card">
-                    <h3>Experimentation</h3>
-                    <p>Designing A/B tests, uplift modeling, and causal inference frameworks to validate hypotheses.</p>
+                    <h3>Enablement & Collaboration</h3>
+                    <p>GitHub-first documentation, Azure DevOps delivery, and stakeholder workshops.</p>
                 </div>
-                <div class="highlight-card">
-                    <h3>Stakeholder Enablement</h3>
-                    <p>Translating analytics into roadmaps, workshops, and data literacy resources for lasting adoption.</p>
-                </div>
+            </div>
+        </section>
+
+        <section class="section section--assignments" id="assignments">
+            <div class="section__heading">
+                <h2>Assignments & Case Files</h2>
+                <p>Original coursework artifacts referenced throughout the README — now one click away.</p>
+            </div>
+            <div class="assignments-grid">
+                <article class="assignment-card">
+                    <h3>Minard Campaign Notebook</h3>
+                    <p>Step-by-step reconstruction of the 1812 campaign visualization with annotated insights.</p>
+                    <div class="assignment-links">
+                        <a href="Assignments/Minard/Minard.ipynb" target="_blank" rel="noopener">Open notebook</a>
+                        <a href="Assignments/Minard/data/minard-troops.csv" target="_blank" rel="noopener">View data</a>
+                    </div>
+                </article>
+                <article class="assignment-card">
+                    <h3>Retail Analytics Storyboard</h3>
+                    <p>A storyboard that aligns merchandising KPIs, supply bottlenecks, and scenario plans before dashboard build.</p>
+                    <div class="assignment-links">
+                        <a href="Assignments/Assignment-1(storyboard).pdf" target="_blank" rel="noopener">Download PDF</a>
+                    </div>
+                </article>
+                <article class="assignment-card">
+                    <h3>Dashboard Critique Annotations</h3>
+                    <p>Deep dive into hierarchy, accessibility, and communication clarity for an analytics dashboard.</p>
+                    <div class="assignment-links">
+                        <a href="Assignments/annotated-Assignment-3.pdf" target="_blank" rel="noopener">Download PDF</a>
+                    </div>
+                </article>
             </div>
         </section>
 
