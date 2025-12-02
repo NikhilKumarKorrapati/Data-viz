@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikhil Kumar Korrapati | Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="site-header" id="top">
+        <nav class="nav">
+            <a class="nav__brand" href="#top">NK Analytics</a>
+            <button class="nav__toggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="nav__bar"></span>
+                <span class="nav__bar"></span>
+                <span class="nav__bar"></span>
+            </button>
+            <ul class="nav__links">
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#insights">Dashboards</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <section class="hero">
+            <div class="hero__copy">
+                <p class="eyebrow">Data Visualization & Analytics Portfolio</p>
+                <h1>Transforming complex datasets into human stories.</h1>
+                <p class="hero__lead">Hi, I’m Nikhil — an analytics specialist with a passion for clear storytelling, insightful dashboards, and design that makes data meaningful.</p>
+                <div class="hero__actions">
+                    <a class="btn btn--primary" href="#projects">Explore portfolio</a>
+                    <a class="btn btn--ghost" href="Assignments/Minard/Minard.ipynb" target="_blank" rel="noopener">View latest notebook</a>
+                </div>
+            </div>
+            <div class="hero__viz">
+                <canvas id="heroChart" aria-label="Hero chart visualizing project impact" role="img"></canvas>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <section class="section section--projects" id="projects">
+            <div class="section__heading">
+                <h2>Selected Projects</h2>
+                <p>A sampling of analytics, dashboards, and storytelling work. Each project blends visual design with practical insights.</p>
+            </div>
+            <div class="projects-grid" id="projectGrid" aria-live="polite"></div>
+        </section>
+
+        <section class="section section--insights" id="insights">
+            <div class="section__heading">
+                <h2>Interactive Dashboards</h2>
+                <p>Quick snapshots from my sandbox of reusable chart templates and insight-first dashboards.</p>
+            </div>
+            <div class="insights-grid">
+                <article class="insight-card">
+                    <header>
+                        <h3>Campaign Reach vs. Attrition</h3>
+                        <p>Inspired by Charles Minard’s visualization — tracking troop counts alongside temperature to highlight attrition patterns.</p>
+                    </header>
+                    <canvas id="minardChart" height="220"></canvas>
+                </article>
+                <article class="insight-card">
+                    <header>
+                        <h3>Monthly Revenue Trajectory</h3>
+                        <p>Forecasting pipeline growth with rolling averages and contribution by channel.</p>
+                    </header>
+                    <canvas id="revenueChart" height="220"></canvas>
+                </article>
+                <article class="insight-card">
+                    <header>
+                        <h3>Segment Conversion Funnel</h3>
+                        <p>Comparing conversion efficiencies by customer segment to prioritize targeting strategies.</p>
+                    </header>
+                    <canvas id="conversionChart" height="220"></canvas>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section--process" id="process">
+            <div class="section__heading">
+                <h2>Analytical Process</h2>
+                <p>Every engagement runs through a human-centered, insight-driven framework.</p>
+            </div>
+            <ol class="process-list">
+                <li>
+                    <h3>Discover</h3>
+                    <p>Understand the business challenge, stakeholders, and success metrics. Audit available data and constraints.</p>
+                </li>
+                <li>
+                    <h3>Design</h3>
+                    <p>Prototype visual narratives using sketches, storyboards, and low-fidelity dashboards to align expectations.</p>
+                </li>
+                <li>
+                    <h3>Develop</h3>
+                    <p>Build clean data pipelines, analytical models, and responsive visualizations using Python, SQL, and modern JS libraries.</p>
+                </li>
+                <li>
+                    <h3>Deliver</h3>
+                    <p>Ship actionable insights with documentation, embed-ready dashboards, and iteration paths for continuous improvement.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section class="section section--testimonials">
+            <div class="section__heading">
+                <h2>Toolkit & Highlights</h2>
+                <p>A blend of data, design, and delivery skills to drive impact end-to-end.</p>
+            </div>
+            <div class="highlight-grid">
+                <div class="highlight-card">
+                    <h3>Data Engineering</h3>
+                    <p>Experienced with Python, pandas, SQL, dbt, and APIs to wrangle datasets into analysis-ready structures.</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>Visualization Craft</h3>
+                    <p>Story-driven dashboards in Tableau, Power BI, Plotly, and D3.js with practical accessibility considerations.</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>Experimentation</h3>
+                    <p>Designing A/B tests, uplift modeling, and causal inference frameworks to validate hypotheses.</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>Stakeholder Enablement</h3>
+                    <p>Translating analytics into roadmaps, workshops, and data literacy resources for lasting adoption.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--contact" id="contact">
+            <div class="section__heading">
+                <h2>Let’s Collaborate</h2>
+                <p>Open to analytics, visualization, and product experimentation engagements. Reach out and let’s build clarity together.</p>
+            </div>
+            <div class="contact-card">
+                <div>
+                    <p>Email</p>
+                    <a href="mailto:korrapatinikhil06@gmail.com">korrapatinikhil06@gmail.com</a>
+                </div>
+                <div>
+                    <p>LinkedIn</p>
+                    <a href="https://www.linkedin.com/in/korrapatinikhil" target="_blank" rel="noopener">linkedin.com/in/korrapatinikhil</a>
+                </div>
+                <div>
+                    <p>GitHub</p>
+                    <a href="https://github.com/NikhilKumarKorrapati" target="_blank" rel="noopener">github.com/NikhilKumarKorrapati</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>© <span id="currentYear"></span> Nikhil Kumar Korrapati. Built with data storytelling in mind.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
