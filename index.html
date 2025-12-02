@@ -6,18 +6,22 @@
     <title>Nikhil Kumar Korrapati | Data Visualization Portfolio</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-content">
-            <a href="#" class="logo">NK</a>
+            <a href="#" class="logo">
+                <span class="logo-primary">Nikhil</span>
+                <span class="logo-secondary">Kumar</span>
+            </a>
             <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#projects">Projects</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="hamburger">
                 <span></span>
@@ -29,135 +33,185 @@
 
     <!-- Hero -->
     <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="title-line">Data</span>
-                <span class="title-line">Visualization</span>
-                <span class="title-line">Specialist</span>
-            </h1>
-            <p class="hero-subtitle">Nikhil Kumar Korrapati</p>
-            <p class="hero-description">Transforming complex data into visual stories that drive insights</p>
-            <a href="#projects" class="cta-btn">
-                <span>View Projects</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">Data Visualization Expert</div>
+                <h1 class="hero-title">Transforming Data Into<br><span class="gradient-text">Visual Stories</span></h1>
+                <p class="hero-description">Building modern data pipelines and interactive visualizations that turn complex datasets into actionable insights for business decisions.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>Explore Work</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Get In Touch</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">15+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">3</span>
+                        <span class="stat-label">Years Exp</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">8+</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-card card-1"></div>
+                <div class="visual-card card-2"></div>
+                <div class="visual-card card-3"></div>
+            </div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects" class="projects-section">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Interactive visualizations and data engineering solutions</p>
+            <div class="section-header">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-description">Interactive data visualizations and analytics solutions across various domains</p>
+            </div>
             
             <div class="projects-grid">
                 
                 <!-- Minard Napoleon -->
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="Minard Visualization">
-                        <div class="project-overlay">
-                            <a href="projects/minard-viewer.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                <article class="project-card">
+                    <a href="projects/minard-viewer.html" class="project-link">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1569163139394-de4798aa62b6?auto=format&fit=crop&w=800&q=80" alt="Historical map visualization">
+                            <div class="project-badge">Geospatial</div>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <span class="project-tag">Geospatial</span>
-                        <h3>Minard's Napoleon March</h3>
-                        <p>Interactive recreation of the historic 1861 flow map using Python & Folium</p>
-                    </div>
-                </div>
+                        <div class="project-content">
+                            <h3>Minard's Napoleon March</h3>
+                            <p>Interactive recreation of Charles Minard's famous 1861 flow map visualizing Napoleon's disastrous Russian campaign using Python and Folium.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Folium</span>
+                                <span>Pandas</span>
+                            </div>
+                            <div class="project-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
 
                 <!-- COVID Analysis -->
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=800&q=80" alt="COVID Analysis">
-                        <div class="project-overlay">
-                            <a href="projects/covid-analysis.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                <article class="project-card">
+                    <a href="projects/covid-analysis.html" class="project-link">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=800&q=80" alt="COVID-19 data analysis">
+                            <div class="project-badge">Public Health</div>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <span class="project-tag">Public Health</span>
-                        <h3>COVID-19 Global Analysis</h3>
-                        <p>Time-series dashboard tracking pandemic trends and vaccination rates</p>
-                    </div>
-                </div>
+                        <div class="project-content">
+                            <h3>COVID-19 Global Analysis</h3>
+                            <p>Comprehensive time-series dashboard tracking pandemic trends, case distributions, and vaccination progress across countries.</p>
+                            <div class="project-tech">
+                                <span>Plotly</span>
+                                <span>Dash</span>
+                                <span>Pandas</span>
+                            </div>
+                            <div class="project-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
 
                 <!-- Customer Segmentation -->
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Customer Segmentation">
-                        <div class="project-overlay">
-                            <a href="projects/customer-segmentation.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                <article class="project-card">
+                    <a href="projects/customer-segmentation.html" class="project-link">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Customer analytics dashboard">
+                            <div class="project-badge">Machine Learning</div>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <span class="project-tag">Machine Learning</span>
-                        <h3>Customer Segmentation Analysis</h3>
-                        <p>K-means clustering visualization for e-commerce customer behavior</p>
-                    </div>
-                </div>
+                        <div class="project-content">
+                            <h3>Customer Segmentation Analysis</h3>
+                            <p>K-means clustering visualization revealing distinct customer behavior patterns and purchasing habits for targeted marketing strategies.</p>
+                            <div class="project-tech">
+                                <span>Scikit-learn</span>
+                                <span>Matplotlib</span>
+                                <span>Seaborn</span>
+                            </div>
+                            <div class="project-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
 
                 <!-- Network Analysis -->
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Network Analysis">
-                        <div class="project-overlay">
-                            <a href="projects/network-analysis.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                <article class="project-card">
+                    <a href="projects/network-analysis.html" class="project-link">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80" alt="Network graph visualization">
+                            <div class="project-badge">Graph Theory</div>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <span class="project-tag">Graph Theory</span>
-                        <h3>Social Network Visualization</h3>
-                        <p>Interactive graph showing connections and influence patterns</p>
-                    </div>
-                </div>
+                        <div class="project-content">
+                            <h3>Social Network Visualization</h3>
+                            <p>Interactive force-directed graph revealing community structures, influence patterns, and connection strengths in social networks.</p>
+                            <div class="project-tech">
+                                <span>D3.js</span>
+                                <span>NetworkX</span>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="project-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
 
                 <!-- Sales Dashboard -->
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Sales Dashboard">
-                        <div class="project-overlay">
-                            <a href="projects/sales-dashboard.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                <article class="project-card">
+                    <a href="projects/sales-dashboard.html" class="project-link">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Business analytics dashboard">
+                            <div class="project-badge">Business Intelligence</div>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <span class="project-tag">Business Intelligence</span>
-                        <h3>Sales Performance Dashboard</h3>
-                        <p>Real-time KPI tracking with Plotly Dash and SQL backend</p>
-                    </div>
-                </div>
+                        <div class="project-content">
+                            <h3>Sales Performance Dashboard</h3>
+                            <p>Real-time KPI tracking system with interactive filters, trend analysis, and predictive insights powered by SQL and Plotly Dash.</p>
+                            <div class="project-tech">
+                                <span>Plotly Dash</span>
+                                <span>SQL</span>
+                                <span>Python</span>
+                            </div>
+                            <div class="project-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
 
                 <!-- Time Series -->
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1611974765270-ca1258634369?auto=format&fit=crop&w=800&q=80" alt="Time Series">
-                        <div class="project-overlay">
-                            <a href="projects/time-series.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                <article class="project-card">
+                    <a href="projects/time-series.html" class="project-link">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80" alt="Stock market forecasting">
+                            <div class="project-badge">Forecasting</div>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <span class="project-tag">Forecasting</span>
-                        <h3>Stock Market Forecasting</h3>
-                        <p>ARIMA and LSTM models for financial time series prediction</p>
-                    </div>
-                </div>
+                        <div class="project-content">
+                            <h3>Stock Market Forecasting</h3>
+                            <p>Advanced time-series prediction using ARIMA and LSTM neural networks to forecast financial market trends with confidence intervals.</p>
+                            <div class="project-tech">
+                                <span>TensorFlow</span>
+                                <span>ARIMA</span>
+                                <span>Plotly</span>
+                            </div>
+                            <div class="project-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </a>
+                </article>
 
             </div>
         </div>
@@ -166,37 +220,74 @@
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About Me</h2>
-                    <p class="lead">Data Engineer & Analytics Specialist</p>
-                    <p>I build modern data stacks with <strong>Snowflake</strong>, <strong>Azure Data Factory</strong>, and <strong>Apache Airflow</strong>. Currently pursuing a Master's in Business Analytics and AI.</p>
-                    <p>My work combines technical precision with visual storytelling—creating dashboards and visualizations that don't just display data, but drive action.</p>
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-tag">About Me</span>
+                    <h2>Building Data Solutions That Drive Results</h2>
+                    <p class="about-lead">I'm a Data Engineer specializing in transforming complex datasets into actionable insights through modern visualization techniques and robust data pipelines.</p>
                     
-                    <div class="tech-stack">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Tableau</span>
-                        <span class="tech-badge">D3.js</span>
-                        <span class="tech-badge">Plotly</span>
-                        <span class="tech-badge">SQL</span>
-                        <span class="tech-badge">Snowflake</span>
-                        <span class="tech-badge">Airflow</span>
-                        <span class="tech-badge">Azure</span>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Data Visualization</h4>
+                                <p>Creating interactive dashboards with Tableau, Plotly, and D3.js</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Data Engineering</h4>
+                                <p>Building scalable pipelines with Snowflake, Airflow, and Azure</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Analytics & ML</h4>
+                                <p>Developing predictive models and statistical analysis solutions</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-grid">
+                        <div class="tech-item">Python</div>
+                        <div class="tech-item">Tableau</div>
+                        <div class="tech-item">Plotly</div>
+                        <div class="tech-item">D3.js</div>
+                        <div class="tech-item">SQL</div>
+                        <div class="tech-item">Snowflake</div>
+                        <div class="tech-item">Airflow</div>
+                        <div class="tech-item">Azure</div>
+                        <div class="tech-item">Pandas</div>
+                        <div class="tech-item">Scikit-learn</div>
                     </div>
                 </div>
-                
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Projects</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Years</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">8+</div>
-                        <div class="stat-label">Tools</div>
+
+                <div class="about-visual">
+                    <div class="experience-card">
+                        <div class="exp-header">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Experience</span>
+                        </div>
+                        <div class="exp-content">
+                            <div class="exp-item">
+                                <h4>Data Engineer</h4>
+                                <p>Building modern data stacks</p>
+                                <span class="exp-years">3+ Years</span>
+                            </div>
+                            <div class="exp-item">
+                                <h4>Master's Student</h4>
+                                <p>Business Analytics & AI</p>
+                                <span class="exp-years">In Progress</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,29 +297,43 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2>Let's Connect</h2>
-            <p class="contact-subtitle">Interested in collaboration or have a project in mind?</p>
-            
-            <div class="contact-links">
-                <a href="mailto:nikhil.korrapati@example.com" class="contact-btn">
-                    <i class="fas fa-envelope"></i>
-                    <span>Email Me</span>
-                </a>
-                <a href="https://github.com/NikhilKumarKorrapati" target="_blank" class="contact-btn">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://linkedin.com/in/nikhilkorrapati" target="_blank" class="contact-btn">
-                    <i class="fab fa-linkedin"></i>
-                    <span>LinkedIn</span>
-                </a>
+            <div class="contact-content">
+                <span class="section-tag">Get In Touch</span>
+                <h2>Let's Work Together</h2>
+                <p>I'm always interested in hearing about new projects and opportunities in data visualization, engineering, and analytics.</p>
+                
+                <div class="contact-grid">
+                    <a href="mailto:nikhil.korrapati@example.com" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Email</h4>
+                        <p>nikhil.korrapati@example.com</p>
+                    </a>
+                    <a href="https://github.com/NikhilKumarKorrapati" target="_blank" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h4>GitHub</h4>
+                        <p>View my code and projects</p>
+                    </a>
+                    <a href="https://linkedin.com/in/nikhilkorrapati" target="_blank" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h4>LinkedIn</h4>
+                        <p>Connect professionally</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Nikhil Kumar Korrapati. Crafted with passion for data storytelling.</p>
+        <div class="container">
+            <p>&copy; 2024 Nikhil Kumar Korrapati. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="assets/js/script.js"></script>
