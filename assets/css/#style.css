@@ -133,6 +133,7 @@ body {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 24px;
+    width: 100%;
 }
 
 .hero-content {
@@ -309,7 +310,7 @@ body {
 .section-tag {
     display: inline-block;
     padding: 6px 16px;
-    background: var(--gray-lighter);
+    background: rgba(37, 99, 235, 0.1);
     color: var(--primary);
     border-radius: 50px;
     font-size: 14px;
@@ -322,11 +323,15 @@ body {
     font-weight: 800;
     margin-bottom: 16px;
     color: var(--dark);
+    text-align: center;
+    letter-spacing: -1px;
 }
 
 .section-description {
     font-size: 18px;
     color: var(--gray);
+    text-align: center;
+    line-height: 1.7;
 }
 
 .projects-grid {
@@ -456,11 +461,17 @@ body {
     background: var(--gray-lighter);
 }
 
+.about-section .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
 .about-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 80px;
     align-items: start;
+    width: 100%;
 }
 
 .about-content {
@@ -619,6 +630,11 @@ body {
 .contact-section {
     padding: var(--section-padding) 0;
     background: white;
+}
+
+.contact-section .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
 }
 
 .contact-content {
