@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const navToggle = document.querySelector('.nav__toggle');
     const navLinks = document.querySelector('.nav__links');
     const yearPlaceholder = document.getElementById('currentYear');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projects = [
         {
             title: 'Minard Campaign Narrative',
-            description: 'Recreated Charles Minard\'s 1812 campaign visualization with modern tooling, layering troop attrition and climate signals to surface decision triggers.',
+            description: 'Reimagined the 1812 expedition using Python, Pandas, and Altair. The notebook layers troop attrition, longitude/latitude paths, and temperature annotations.',
             tags: ['Storytelling', 'Jupyter', 'Altair'],
             media: 'Assignments/Minard/Minard-1.png',
             links: [
@@ -28,18 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         {
-            title: 'Storyboard: Retail Analytics',
-            description: 'Storyboard for a retail performance dashboard covering merchandising KPIs, supply bottlenecks, and scenario-driven recommendations.',
-            tags: ['Storyboard', 'User Journey', 'Figma'],
+            title: 'Retail Analytics Storyboard',
+            description: 'Storyboard aligning merchandising KPIs, supply risk, and scenario branches before dashboard build — a pre-read for business stakeholders.',
+            tags: ['Storyboard', 'Experience Design', 'Planning'],
             media: 'Assignments/Assignment-1(storyboard).pdf',
             links: [
                 { label: 'Download storyboard', url: 'Assignments/Assignment-1(storyboard).pdf' }
             ]
         },
         {
-            title: 'Annotated Dashboard Critique',
-            description: 'Annotated critique of an analytics dashboard focusing on accessibility, hierarchy, and communication clarity.',
-            tags: ['Dashboard Design', 'Accessibility', 'Case Study'],
+            title: 'Dashboard Critique Annotations',
+            description: 'Annotated critique focused on accessibility, hierarchy, and communication clarity. Highlights actionable layout and color recommendations.',
+            tags: ['Dashboard Design', 'Accessibility', 'Critique'],
             media: 'Assignments/annotated-Assignment-3.pdf',
             links: [
                 { label: 'Read annotations', url: 'Assignments/annotated-Assignment-3.pdf' }
@@ -47,11 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'Customer Growth Diagnostics',
-            description: 'Segment-level funnel diagnostics combining churn prediction, cohort analytics, and activation scoring to prioritize experimentation.',
-            tags: ['Predictive Modeling', 'Cohort Analysis', 'Plotly'],
+            description: 'Cohort analysis and experimentation backlog tracker connecting churn prediction, activation scoring, and growth hypotheses.',
+            tags: ['Cohort Analysis', 'Experimentation', 'Product Analytics'],
             media: null,
             links: [
-                { label: 'Explore live dashboard', url: '#insights' },
+                { label: 'Explore charts', url: '#insights' },
                 { label: 'Request walkthrough', url: '#contact' }
             ]
         }
@@ -121,84 +121,120 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const chartConfig = (context, gradientStops) => {
-        const ctx = context.getContext('2d');
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradientStops.forEach(stop => gradient.addColorStop(stop.offset, stop.color));
-        return gradient;
-    };
-
     const heroCanvas = document.getElementById('heroChart');
     if (heroCanvas) {
-        const gradient = chartConfig(heroCanvas, [
-            { offset: 0, color: 'rgba(56, 189, 248, 0.45)' },
-            { offset: 1, color: 'rgba(56, 189, 248, 0.05)' }
-        ]);
-
         new Chart(heroCanvas, {
-            type: 'line',
+            type: 'radar',
             data: {
-                labels: ['Discovery', 'Prototype', 'Model', 'Launch'],
+                labels: ['Data Engineering', 'Visualization Craft', 'Experimentation', 'Stakeholder Enablement', 'Storytelling'],
                 datasets: [
                     {
-                        label: 'Insight Velocity',
-                        data: [14, 36, 58, 92],
-                        fill: true,
-                        backgroundColor: gradient,
+                        label: 'Skill Focus',
+                        data: [90, 96, 82, 88, 94],
+                        backgroundColor: 'rgba(56, 189, 248, 0.35)',
                         borderColor: '#38bdf8',
-                        tension: 0.45,
-                        borderWidth: 2.5,
-                        pointRadius: 4,
-                        pointBackgroundColor: '#0f172a',
-                        pointBorderColor: '#38bdf8'
+                        borderWidth: 2,
+                        pointBackgroundColor: '#38bdf8',
+                        pointBorderColor: '#0f172a',
+                        pointRadius: 4
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(148, 163, 184, 0.12)' },
+                        angleLines: { color: 'rgba(148, 163, 184, 0.12)' },
+                        pointLabels: { color: '#cbd5f5', font: { size: 12 } },
+                        ticks: { display: false, maxTicksLimit: 4 }
+                    }
+                },
                 plugins: {
                     legend: { display: false }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#94a3b8' },
-                        grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#94a3b8' },
-                        grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                    }
                 }
             }
         });
     }
 
+    await renderMinardChart();
+    renderCoverageChart();
+    renderFormatsChart();
+});
+
+function parseCSV(text) {
+    const rows = text.trim().split(/\r?\n/).filter(Boolean);
+    const headers = extractColumns(rows.shift());
+    return rows.map(row => {
+        const cols = extractColumns(row);
+        return headers.reduce((acc, header, index) => {
+            const value = cols[index] ?? '';
+            acc[header] = value;
+            return acc;
+        }, {});
+    });
+}
+
+function extractColumns(row) {
+    const matches = row.match(/(".*?"|[^",]+)(?=,|$)/g) || [];
+    return matches.map(col => col.replace(/^"|"$/g, '').trim());
+}
+
+async function fetchCSV(path) {
+    const response = await fetch(path);
+    if (!response.ok) {
+        throw new Error(`Failed to load ${path}`);
+    }
+    const text = await response.text();
+    return parseCSV(text);
+}
+
+async function renderMinardChart() {
     const minardCanvas = document.getElementById('minardChart');
-    if (minardCanvas) {
+    if (!minardCanvas) {
+        return;
+    }
+
+    try {
+        const [pathData, temperatureData] = await Promise.all([
+            fetchCSV('Assignments/Minard/data/minard-cities.csv'),
+            fetchCSV('Assignments/Minard/data/minard-temp.csv')
+        ]);
+
+        const primaryPath = pathData.filter(point => point.group === '1');
+        const labels = primaryPath.map((point, index) => point.city || `${point.direction} ${index + 1}`);
+        const survivors = primaryPath.map(point => Number(point.survivors) / 1000);
+
+        const temps = primaryPath.map(point => {
+            const pointLong = Number(point.long);
+            const entry = temperatureData.find(temp => Math.abs(Number(temp.long) - pointLong) < 0.35);
+            return entry ? Number(entry.temp) : null;
+        });
+
         new Chart(minardCanvas, {
             type: 'line',
             data: {
-                labels: ['Kowno', 'Wilna', 'Smorgoni', 'Minsk', 'Mojaisk', 'Moscow', 'Smolensk', 'Orsha', 'Borisov', 'Vilna'],
+                labels,
                 datasets: [
                     {
                         label: 'Troop Strength (thousands)',
-                        data: [422, 400, 340, 320, 150, 100, 60, 37, 24, 10],
+                        data: survivors,
                         borderColor: '#f97316',
                         backgroundColor: 'rgba(249, 115, 22, 0.15)',
                         borderWidth: 2.2,
-                        tension: 0.35,
+                        tension: 0.3,
                         yAxisID: 'y'
                     },
                     {
                         label: 'Temperature (°C)',
-                        data: [-1, -5, -9, -15, -20, -25, -27, -33, -30, -22],
+                        data: temps,
                         borderColor: '#38bdf8',
-                        backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                        backgroundColor: 'rgba(56, 189, 248, 0.2)',
                         borderDash: [6, 6],
                         borderWidth: 2,
-                        tension: 0.35,
+                        tension: 0.3,
                         yAxisID: 'y1'
                     }
                 ]
@@ -206,20 +242,13 @@ document.addEventListener('DOMContentLoaded', () => {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false
-                },
+                interaction: { mode: 'index', intersect: false },
                 plugins: {
-                    legend: {
-                        labels: { color: '#cbd5f5' }
-                    },
+                    legend: { labels: { color: '#cbd5f5' } },
                     tooltip: {
                         callbacks: {
-                            label: context => {
-                                const value = context.formattedValue;
-                                return `${context.dataset.label}: ${value}`;
-                            }
+                            title: items => items[0]?.label ?? '',
+                            label: context => `${context.dataset.label}: ${context.parsed.y}`
                         }
                     }
                 },
@@ -247,101 +276,106 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function renderCoverageChart() {
+    const coverageCanvas = document.getElementById('coverageChart');
+    if (!coverageCanvas) {
+        return;
     }
 
-    const revenueCanvas = document.getElementById('revenueChart');
-    if (revenueCanvas) {
-        new Chart(revenueCanvas, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [
-                    {
-                        type: 'line',
-                        label: 'Forecast',
-                        data: [82, 88, 94, 100, 108, 118, 126, 132, 136, 142, 148, 155],
-                        borderColor: '#facc15',
-                        borderWidth: 2,
-                        tension: 0.35,
-                        pointRadius: 3,
-                        fill: false
-                    },
-                    {
-                        label: 'Actuals',
-                        data: [78, 84, 96, 102, 112, 120, 129, 135, 140, 146, 152, 161],
-                        backgroundColor: 'rgba(56, 189, 248, 0.65)',
-                        borderRadius: 8,
-                        barPercentage: 0.65
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { color: '#cbd5f5' }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#94a3b8' },
-                        grid: { display: false }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: '#94a3b8',
-                            callback: value => `$${value}k`
-                        },
-                        grid: { color: 'rgba(148, 163, 184, 0.08)' }
+    new Chart(coverageCanvas, {
+        type: 'bar',
+        data: {
+            labels: ['Pipelines & Platforms', 'Analytics & Visualization', 'Enablement & Collaboration'],
+            datasets: [
+                {
+                    label: 'Time Allocation (%)',
+                    data: [35, 45, 20],
+                    backgroundColor: [
+                        'rgba(14, 165, 233, 0.65)',
+                        'rgba(59, 130, 246, 0.7)',
+                        'rgba(165, 180, 252, 0.7)'
+                    ],
+                    borderRadius: 10,
+                    borderSkipped: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#cbd5f5' } },
+                tooltip: {
+                    callbacks: {
+                        label: context => `${context.parsed.y}% focus`
                     }
                 }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#94a3b8' },
+                    grid: { display: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#94a3b8',
+                        callback: value => `${value}%`
+                    },
+                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
+                }
             }
-        });
+        }
+    });
+}
+
+function renderFormatsChart() {
+    const formatsCanvas = document.getElementById('formatsChart');
+    if (!formatsCanvas) {
+        return;
     }
 
-    const conversionCanvas = document.getElementById('conversionChart');
-    if (conversionCanvas) {
-        new Chart(conversionCanvas, {
-            type: 'doughnut',
-            data: {
-                labels: ['Enterprise', 'Scale-up', 'SMB', 'Self-serve'],
-                datasets: [
-                    {
-                        data: [32, 26, 18, 24],
-                        backgroundColor: [
-                            'rgba(56, 189, 248, 0.8)',
-                            'rgba(59, 130, 246, 0.75)',
-                            'rgba(96, 165, 250, 0.75)',
-                            'rgba(37, 99, 235, 0.75)'
-                        ],
-                        borderColor: '#0f172a',
-                        borderWidth: 3,
-                        hoverOffset: 10
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#cbd5f5', padding: 16 }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: context => {
-                                const total = context.dataset.data.reduce((acc, value) => acc + value, 0);
-                                const current = context.parsed;
-                                const percent = ((current / total) * 100).toFixed(1);
-                                return `${context.label}: ${current}% • ${percent}% share`;
-                            }
+    new Chart(formatsCanvas, {
+        type: 'doughnut',
+        data: {
+            labels: ['Decision-ready dashboards', 'Narrative scrollytelling', 'Comparative visuals'],
+            datasets: [
+                {
+                    data: [40, 32, 28],
+                    backgroundColor: [
+                        'rgba(56, 189, 248, 0.85)',
+                        'rgba(14, 165, 233, 0.85)',
+                        'rgba(2, 132, 199, 0.85)'
+                    ],
+                    borderColor: '#0f172a',
+                    borderWidth: 3,
+                    hoverOffset: 10
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#cbd5f5', padding: 16 }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: context => {
+                            const total = context.dataset.data.reduce((sum, value) => sum + value, 0);
+                            const share = ((context.parsed / total) * 100).toFixed(1);
+                            return `${context.label}: ${context.parsed}% focus • ${share}% share`;
                         }
                     }
                 }
             }
-        });
-    }
-});
+        }
+    });
+}
