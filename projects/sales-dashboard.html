@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Sales Dashboard | Nikhil Kumar Korrapati</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .project-detail {
+            min-height: 100vh;
+            padding: 100px 0 50px;
+            background: var(--dark-bg);
+        }
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .project-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        .back-link:hover {
+            gap: 1rem;
+        }
+        .dashboard-container {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .metric-card {
+            background: var(--dark-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .metric-label {
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+        .metric-change {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .metric-change.positive {
+            color: #10b981;
+        }
+        .metric-change.negative {
+            color: #ef4444;
+        }
+        .chart-container {
+            background: var(--dark-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .project-description {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .project-description h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="project-detail">
+        <div class="container">
+            <a href="../index.html#projects" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+
+            <div class="project-header">
+                <h1>Executive Sales Dashboard</h1>
+                <p style="color: var(--text-muted);">Interactive business intelligence dashboard for real-time sales insights</p>
+            </div>
+
+            <!-- KPI Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$2.4M</div>
+                    <div class="metric-label">Total Revenue</div>
+                    <div class="metric-change positive">
+                        <i class="fas fa-arrow-up"></i> 12.5% vs last quarter
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1,247</div>
+                    <div class="metric-label">Total Orders</div>
+                    <div class="metric-change positive">
+                        <i class="fas fa-arrow-up"></i> 8.3% vs last quarter
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$1,925</div>
+                    <div class="metric-label">Avg Order Value</div>
+                    <div class="metric-change positive">
+                        <i class="fas fa-arrow-up"></i> 4.1% vs last quarter
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">89%</div>
+                    <div class="metric-label">Customer Satisfaction</div>
+                    <div class="metric-change negative">
+                        <i class="fas fa-arrow-down"></i> 2.1% vs last quarter
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Visualizations -->
+            <div class="dashboard-container">
+                <h2 style="color: var(--text-primary); margin-bottom: 1.5rem;">Sales Performance Overview</h2>
+                
+                <!-- Revenue Trend Chart -->
+                <div class="chart-container">
+                    <h3 style="color: var(--text-secondary); margin-bottom: 1rem;">Monthly Revenue Trend</h3>
+                    <div id="revenueTrend"></div>
+                </div>
+
+                <!-- Sales by Region Chart -->
+                <div class="chart-container">
+                    <h3 style="color: var(--text-secondary); margin-bottom: 1rem;">Sales by Region</h3>
+                    <div id="salesByRegion"></div>
+                </div>
+
+                <!-- Product Performance Chart -->
+                <div class="chart-container">
+                    <h3 style="color: var(--text-secondary); margin-bottom: 1rem;">Top Performing Products</h3>
+                    <div id="productPerformance"></div>
+                </div>
+            </div>
+
+            <!-- Project Description -->
+            <div class="project-description">
+                <h3>Project Overview</h3>
+                <p>
+                    This executive sales dashboard provides a comprehensive view of business performance metrics, 
+                    enabling data-driven decision-making at the leadership level. The dashboard consolidates data 
+                    from multiple sources to present real-time insights into revenue trends, regional performance, 
+                    and product analytics.
+                </p>
+                
+                <h3 style="margin-top: 2rem;">Key Features</h3>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>Real-time KPI tracking with comparative analytics</li>
+                    <li>Interactive visualizations with drill-down capabilities</li>
+                    <li>Regional performance analysis and geographic insights</li>
+                    <li>Product-level revenue attribution and trend analysis</li>
+                    <li>Responsive design for mobile and desktop viewing</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Technologies Used</h3>
+                <p>Tableau, Python (Pandas), SQL, Plotly, JavaScript</p>
+
+                <h3 style="margin-top: 2rem;">Impact</h3>
+                <p>
+                    This dashboard reduced reporting time by 75% and enabled executives to identify 
+                    revenue opportunities 3x faster than previous manual reporting methods. The interactive 
+                    features allow stakeholders to explore data at their own pace and discover actionable insights.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Revenue Trend Chart
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const revenue = [180000, 195000, 210000, 198000, 225000, 240000, 235000, 250000, 265000, 270000, 285000, 295000];
+        const target = Array(12).fill(220000);
+
+        const revenueTrace1 = {
+            x: months,
+            y: revenue,
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'Actual Revenue',
+            line: { color: '#667eea', width: 3 },
+            marker: { size: 8 }
+        };
+
+        const revenueTrace2 = {
+            x: months,
+            y: target,
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Target',
+            line: { color: '#f59e0b', width: 2, dash: 'dash' }
+        };
+
+        const revenueLayout = {
+            paper_bgcolor: '#0f172a',
+            plot_bgcolor: '#0f172a',
+            font: { color: '#cbd5e1' },
+            xaxis: { gridcolor: '#1e293b' },
+            yaxis: { gridcolor: '#1e293b', tickformat: '$,.0f' },
+            margin: { t: 20, b: 40, l: 60, r: 20 },
+            hovermode: 'x unified'
+        };
+
+        Plotly.newPlot('revenueTrend', [revenueTrace1, revenueTrace2], revenueLayout, {responsive: true});
+
+        // Sales by Region Chart
+        const regions = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East'];
+        const sales = [950000, 720000, 580000, 280000, 250000];
+
+        const regionTrace = {
+            x: regions,
+            y: sales,
+            type: 'bar',
+            marker: {
+                color: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe']
+            }
+        };
+
+        const regionLayout = {
+            paper_bgcolor: '#0f172a',
+            plot_bgcolor: '#0f172a',
+            font: { color: '#cbd5e1' },
+            xaxis: { gridcolor: '#1e293b' },
+            yaxis: { gridcolor: '#1e293b', tickformat: '$,.0f' },
+            margin: { t: 20, b: 60, l: 60, r: 20 }
+        };
+
+        Plotly.newPlot('salesByRegion', [regionTrace], regionLayout, {responsive: true});
+
+        // Product Performance Chart
+        const products = ['Product A', 'Product B', 'Product C', 'Product D', 'Product E', 'Product F'];
+        const productRevenue = [450000, 380000, 320000, 280000, 240000, 210000];
+
+        const productTrace = {
+            x: productRevenue,
+            y: products,
+            type: 'bar',
+            orientation: 'h',
+            marker: {
+                color: '#667eea',
+                line: { color: '#764ba2', width: 2 }
+            }
+        };
+
+        const productLayout = {
+            paper_bgcolor: '#0f172a',
+            plot_bgcolor: '#0f172a',
+            font: { color: '#cbd5e1' },
+            xaxis: { gridcolor: '#1e293b', tickformat: '$,.0f' },
+            yaxis: { gridcolor: '#1e293b' },
+            margin: { t: 20, b: 40, l: 100, r: 20 }
+        };
+
+        Plotly.newPlot('productPerformance', [productTrace], productLayout, {responsive: true});
+    </script>
+</body>
+</html>

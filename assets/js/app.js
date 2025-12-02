@@ -1,318 +1,393 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const navToggle = document.querySelector('.nav__toggle');
-    const navLinks = document.querySelector('.nav__links');
-    const yearPlaceholder = document.getElementById('currentYear');
+// ===================================
+// Smooth Scrolling & Navigation
+// ===================================
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    if (yearPlaceholder) {
-        yearPlaceholder.textContent = new Date().getFullYear();
-    }
-
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', () => {
-            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', String(!expanded));
-            navLinks.classList.toggle('is-open');
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
     }
 
-    renderSkillChart();
-
-    try {
-        const [troops, cities, temperature] = await Promise.all([
-            fetchCSV('Assignments/Minard/data/minard-troops.csv'),
-            fetchCSV('Assignments/Minard/data/minard-cities.csv'),
-            fetchCSV('Assignments/Minard/data/minard-temp.csv')
-        ]);
-
-        renderMinardChart(troops, cities, temperature);
-        renderTemperatureTimeline(temperature);
-        renderSurvivalChart(troops);
-    } catch (error) {
-        console.error('Failed to load Minard data', error);
-    }
-});
-
-function renderSkillChart() {
-    const canvas = document.getElementById('skillChart');
-    if (!canvas) {
-        return;
-    }
-
-    new Chart(canvas, {
-        type: 'radar',
-        data: {
-            labels: ['Data Engineering', 'Visualization Craft', 'Experimentation', 'Stakeholder Enablement', 'Storytelling'],
-            datasets: [
-                {
-                    label: 'Skill Focus',
-                    data: [90, 95, 82, 88, 93],
-                    backgroundColor: 'rgba(96, 165, 250, 0.35)',
-                    borderColor: '#60a5fa',
-                    borderWidth: 2,
-                    pointBackgroundColor: '#60a5fa',
-                    pointBorderColor: '#0b1220',
-                    pointRadius: 4
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    beginAtZero: true,
-                    grid: { color: 'rgba(148, 163, 184, 0.14)' },
-                    angleLines: { color: 'rgba(148, 163, 184, 0.14)' },
-                    pointLabels: { color: '#cbd5f5', font: { size: 12 } },
-                    ticks: { display: false }
-                }
-            },
-            plugins: {
-                legend: { display: false }
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            if (hamburger) {
+                hamburger.classList.remove('active');
             }
+        });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // ===================================
+    // Navbar Scroll Effect
+    // ===================================
+    const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 100) {
+            navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+        } else {
+            navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            navbar.style.background = 'rgba(15, 23, 42, 0.95)';
         }
-    });
-}
 
-function parseCSV(text) {
-    const rows = text.trim().split(/\r?\n/).filter(Boolean);
-    const headers = extractColumns(rows.shift());
-    return rows.map(row => {
-        const cols = extractColumns(row);
-        return headers.reduce((acc, header, index) => {
-            const value = cols[index] ?? '';
-            acc[header] = value;
-            return acc;
-        }, {});
-    });
-}
-
-function extractColumns(row) {
-    const matches = row.match(/(".*?"|[^",]+)(?=,|$)/g) || [];
-    return matches.map(col => col.replace(/^"|"$/g, '').trim());
-}
-
-async function fetchCSV(path) {
-    const response = await fetch(path);
-    if (!response.ok) {
-        throw new Error(`Failed to load ${path}`);
-    }
-    const text = await response.text();
-    return parseCSV(text);
-}
-
-function renderMinardChart(troops, cities, temperature) {
-    const canvas = document.getElementById('minardChart');
-    if (!canvas) {
-        return;
-    }
-
-    const group1Advance = troops.filter(item => item.group === '1' && item.direction === 'Advance');
-    const pathLabels = group1Advance.map(point => {
-        const match = cities.find(city => city.long === point.long && city.lat === point.lat);
-        return match && match.city ? match.city : point.direction;
+        lastScroll = currentScroll;
     });
 
-    const strength = group1Advance.map(point => Number(point.survivors) / 1000);
+    // ===================================
+    // Project Filtering
+    // ===================================
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
 
-    const temperatureByLong = temperature.reduce((acc, entry) => {
-        acc[Number(entry.long)] = Number(entry.temp);
-        return acc;
-    }, {});
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
 
-    const tempSeries = group1Advance.map(point => {
-        const key = findNearest(Object.keys(temperatureByLong).map(Number), Number(point.long));
-        return key !== null ? temperatureByLong[key] : null;
-    });
+            const filterValue = button.getAttribute('data-filter');
 
-    new Chart(canvas, {
-        type: 'line',
-        data: {
-            labels: pathLabels,
-            datasets: [
-                {
-                    label: 'Troop strength (thousands)',
-                    data: strength,
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245, 158, 11, 0.18)',
-                    borderWidth: 2,
-                    tension: 0.25,
-                    yAxisID: 'y'
-                },
-                {
-                    label: 'Temperature (°C)',
-                    data: tempSeries,
-                    borderColor: '#60a5fa',
-                    backgroundColor: 'rgba(96, 165, 250, 0.2)',
-                    borderDash: [6, 6],
-                    borderWidth: 2,
-                    tension: 0.25,
-                    yAxisID: 'y1'
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-                legend: {
-                    labels: { color: '#cbd5f5' }
-                },
-                tooltip: {
-                    callbacks: {
-                        title: items => items[0]?.label ?? '',
-                        label: context => `${context.dataset.label}: ${context.parsed.y}`
+            projectCards.forEach(card => {
+                // Reset animation
+                card.style.animation = 'none';
+                
+                if (filterValue === 'all') {
+                    setTimeout(() => {
+                        card.classList.remove('hidden');
+                        card.style.animation = 'fadeIn 0.5s ease';
+                    }, 10);
+                } else {
+                    const categories = card.getAttribute('data-category').split(' ');
+                    if (categories.includes(filterValue)) {
+                        setTimeout(() => {
+                            card.classList.remove('hidden');
+                            card.style.animation = 'fadeIn 0.5s ease';
+                        }, 10);
+                    } else {
+                        card.classList.add('hidden');
                     }
                 }
-            },
-            scales: {
-                x: {
-                    ticks: { color: '#9ca9c9' },
-                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                },
-                y: {
-                    position: 'left',
-                    ticks: { color: '#fbbf24' },
-                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                },
-                y1: {
-                    position: 'right',
-                    ticks: { color: '#60a5fa', callback: value => `${value}°` },
-                    grid: { drawOnChartArea: false }
-                }
-            }
-        }
+            });
+        });
     });
-}
 
-function renderTemperatureTimeline(temperature) {
-    const canvas = document.getElementById('temperatureChart');
-    if (!canvas) {
-        return;
+    // ===================================
+    // Scroll Animations
+    // ===================================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all project cards and skill categories
+    document.querySelectorAll('.project-card, .skill-category, .stat-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+    // ===================================
+    // Active Navigation Link on Scroll
+    // ===================================
+    const sections = document.querySelectorAll('section[id]');
+
+    function updateActiveNav() {
+        const scrollPosition = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
     }
 
-    const filtered = temperature.filter(item => item.temp !== '');
-    const labels = filtered.map(entry => entry.date || `Lon ${entry.long}`);
-    const temps = filtered.map(entry => Number(entry.temp));
+    window.addEventListener('scroll', updateActiveNav);
 
-    new Chart(canvas, {
-        type: 'bar',
-        data: {
-            labels,
-            datasets: [
-                {
-                    label: 'Temperature (°C)',
-                    data: temps,
-                    backgroundColor: temps.map(value => value <= -20 ? 'rgba(239, 68, 68, 0.7)' : 'rgba(59, 130, 246, 0.7)'),
-                    borderRadius: 10,
-                    borderSkipped: false
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                x: {
-                    ticks: { color: '#9ca9c9' },
-                    grid: { display: false }
-                },
-                y: {
-                    ticks: { color: '#9ca9c9', callback: value => `${value}°` },
-                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                }
+    // ===================================
+    // Typing Effect for Hero Subtitle (Optional)
+    // ===================================
+    const subtitle = document.querySelector('.hero-subtitle');
+    if (subtitle) {
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                subtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
             }
         }
-    });
-}
 
-function renderSurvivalChart(troops) {
-    const canvas = document.getElementById('survivalChart');
-    if (!canvas) {
-        return;
+        // Start typing effect after page load
+        setTimeout(typeWriter, 1000);
     }
 
-    const groups = Array.from(new Set(troops.map(item => item.group))).sort();
+    // ===================================
+    // Animated Counter for Stats
+    // ===================================
+    const statNumbers = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
 
-    const stats = groups.map(group => {
-        const groupData = troops.filter(item => item.group === group);
-        const advance = groupData.filter(item => item.direction === 'Advance');
-        const retreat = groupData.filter(item => item.direction === 'Retreat');
-
-        const start = advance.length ? Math.max(...advance.map(item => Number(item.survivors))) : 0;
-        const end = retreat.length ? Math.min(...retreat.map(item => Number(item.survivors))) : start;
-
-        const survivalRate = start > 0 ? Math.round((end / start) * 100) : 0;
-
-        return {
-            group: `Group ${group}`,
-            start,
-            end,
-            survivalRate
-        };
-    });
-
-    new Chart(canvas, {
-        type: 'bar',
-        data: {
-            labels: stats.map(item => item.group),
-            datasets: [
-                {
-                    label: 'Campaign start',
-                    data: stats.map(item => item.start),
-                    backgroundColor: 'rgba(125, 211, 252, 0.65)',
-                    borderRadius: 12,
-                    borderSkipped: false
-                },
-                {
-                    label: 'Campaign end',
-                    data: stats.map(item => item.end),
-                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                    borderRadius: 12,
-                    borderSkipped: false
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: { color: '#cbd5f5' }
-                },
-                tooltip: {
-                    callbacks: {
-                        afterBody: items => {
-                            const index = items[0].dataIndex;
-                            return `Survival rate: ${stats[index].survivalRate}%`;
+    const statsObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                statNumbers.forEach(stat => {
+                    const target = stat.textContent;
+                    const isPlus = target.includes('+');
+                    const isPercent = target.includes('%');
+                    const number = parseInt(target.replace(/[^0-9]/g, ''));
+                    
+                    let current = 0;
+                    const increment = number / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= number) {
+                            stat.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            const displayValue = Math.floor(current);
+                            stat.textContent = displayValue + (isPlus ? '+' : '') + (isPercent ? '%' : '');
                         }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: { color: '#9ca9c9' },
-                    grid: { display: false }
-                },
-                y: {
-                    ticks: {
-                        color: '#9ca9c9',
-                        callback: value => `${value.toLocaleString()}`
-                    },
-                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                }
+                    }, 30);
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.about-stats');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+
+    // ===================================
+    // Parallax Effect for Hero Section
+    // ===================================
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = hero.querySelector('.hero-content');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.3}px)`;
+                parallax.style.opacity = 1 - scrolled / 600;
+            }
+        });
+    }
+
+    // ===================================
+    // Dynamic Year in Footer
+    // ===================================
+    const footer = document.querySelector('.footer p');
+    if (footer) {
+        const currentYear = new Date().getFullYear();
+        footer.innerHTML = footer.innerHTML.replace('2024', currentYear);
+    }
+
+    // ===================================
+    // Project Card Hover Sound Effect (Optional)
+    // ===================================
+    projectCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+    });
+
+    // ===================================
+    // Lazy Loading for Project Images
+    // ===================================
+    const images = document.querySelectorAll('img[src]');
+    const imageOptions = {
+        threshold: 0,
+        rootMargin: '0px 0px 300px 0px'
+    };
+
+    const imageObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    }, imageOptions);
+
+    images.forEach(img => {
+        imageObserver.observe(img);
+    });
+
+    // ===================================
+    // Copy Email to Clipboard
+    // ===================================
+    const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+    emailLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const email = this.getAttribute('href').replace('mailto:', '');
+            
+            // Try to copy to clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(email).then(() => {
+                    showNotification('Email copied to clipboard!');
+                });
+            }
+        });
+    });
+
+    // ===================================
+    // Show Notification Helper
+    // ===================================
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // Add animation keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
             }
         }
-    });
-}
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
 
-function findNearest(values, target) {
-    if (!values.length) {
-        return null;
-    }
-    return values.reduce((prev, curr) => Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
-}
+    // ===================================
+    // Scroll to Top Button (Optional)
+    // ===================================
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollTopBtn.className = 'scroll-top-btn';
+    scrollTopBtn.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        z-index: 999;
+    `;
+
+    document.body.appendChild(scrollTopBtn);
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.display = 'flex';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    scrollTopBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px) scale(1.1)';
+    });
+
+    scrollTopBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+
+    console.log('Portfolio loaded successfully! 🚀');
+});
