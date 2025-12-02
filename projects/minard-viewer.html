@@ -213,9 +213,9 @@
 
                 <!-- Visualization 2: Analytical Dashboard -->
                 <div style="margin-bottom: 4rem;">
-                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">2. Analytical Dashboard</h3>
+                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">2. Losses by Group Analysis</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        Comprehensive analysis of troop losses, temperature changes, and group survival rates.
+                        Track the survival journey of each army group from campaign start to end, revealing the devastating attrition rates.
                     </p>
                     <div id="dashboard" class="viz-container"></div>
                 </div>
@@ -419,9 +419,6 @@
 
         // Dashboard
         function loadDashboard() {
-            // Temperature data
-            const tempClean = tempData.filter(t => t.temp !== null && t.temp !== undefined);
-
             // Group losses - Line graph showing survival journey
             const groupLosses = [];
             const groups = [...new Set(troopsData.map(d => d.group).filter(g => g))];
@@ -462,76 +459,22 @@
                 });
             });
 
-            const allTraces = [...traces];
-
             const layout = {
-                title: "Napoleon's 1812 Campaign - Comprehensive Analysis",
-                height: 1200,
+                title: "Napoleon's 1812 Campaign - Losses by Group",
+                height: 600,
                 showlegend: true,
                 paper_bgcolor: '#1a1a2e',
                 plot_bgcolor: '#1a1a2e',
                 font: { color: '#e0e0e0' },
                 xaxis: { 
-                    title: 'Campaign Phase',
-                    domain: [0, 1],
-                    anchor: 'y'
+                    title: 'Campaign Phase'
                 },
                 yaxis: { 
-                    title: 'Number of Soldiers',
-                    domain: [0.55, 1],
-                    anchor: 'x'
-                },
-                xaxis2: { 
-                    title: 'Date',
-                    domain: [0, 1],
-                    anchor: 'y2'
-                },
-                yaxis2: { 
-                    title: 'Temperature (°C)',
-                    domain: [0, 0.45],
-                    anchor: 'x2'
-                },
-                annotations: [
-                    {
-                        text: 'Losses by Group',
-                        font: { size: 16 },
-                        showarrow: false,
-                        x: 0.5,
-                        xref: 'paper',
-                        y: 1.0,
-                        yref: 'paper',
-                        xanchor: 'center',
-                        yanchor: 'bottom'
-                    },
-                    {
-                        text: 'Temperature by Date',
-                        font: { size: 16 },
-                        showarrow: false,
-                        x: 0.5,
-                        xref: 'paper',
-                        y: 0.45,
-                        yref: 'paper',
-                        xanchor: 'center',
-                        yanchor: 'bottom'
-                    }
-                ]
+                    title: 'Number of Soldiers'
+                }
             };
 
-            Plotly.newPlot('dashboard', allTraces, layout);
-
-            // Add temperature trace separately to second subplot
-            Plotly.addTraces('dashboard', [{
-                x: tempClean.map(t => t.date),
-                y: tempClean.map(t => t.temp),
-                type: 'scatter',
-                mode: 'lines+markers',
-                name: 'Temperature',
-                line: { color: 'blue', width: 4 },
-                marker: { size: 15, color: 'blue' },
-                xaxis: 'x2',
-                yaxis: 'y2',
-                hovertemplate: 'Date: %{x}<br>Temperature: %{y}°C<extra></extra>'
-            }]);
+            Plotly.newPlot('dashboard', traces, layout);
         }
 
         // Temperature Analysis
