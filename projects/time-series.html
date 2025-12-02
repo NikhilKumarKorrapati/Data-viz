@@ -45,6 +45,12 @@
             padding: 1.5rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .chart-container > div {
+            max-width: 100%;
+            height: 400px !important;
         }
         .project-description {
             background: var(--dark-card);
@@ -193,10 +199,11 @@
             xaxis: { gridcolor: '#1e293b' },
             yaxis: { title: 'Demand Units', gridcolor: '#1e293b' },
             margin: { t: 20, b: 60, l: 60, r: 20 },
-            hovermode: 'x unified'
+            hovermode: 'x unified',
+            autosize: true
         };
 
-        Plotly.newPlot('forecastChart', [lowerTrace, upperTrace, actualTrace, forecastTrace], forecastLayout, {responsive: true});
+        Plotly.newPlot('forecastChart', [lowerTrace, upperTrace, actualTrace, forecastTrace], forecastLayout, {responsive: true, displayModeBar: false});
 
         // Seasonality decomposition
         const trendData = months.slice(0, 24).map((m, i) => 1000 + i * 20);
@@ -234,10 +241,11 @@
                 gridcolor: '#1e293b'
             },
             margin: { t: 20, b: 60, l: 60, r: 60 },
-            hovermode: 'x unified'
+            hovermode: 'x unified',
+            autosize: true
         };
 
-        Plotly.newPlot('seasonalityChart', [trendTrace, seasonalTrace], seasonalityLayout, {responsive: true});
+        Plotly.newPlot('seasonalityChart', [trendTrace, seasonalTrace], seasonalityLayout, {responsive: true, displayModeBar: false});
 
         // Model comparison
         const models = ['ARIMA', 'Prophet', 'LSTM', 'Ensemble'];
@@ -274,10 +282,11 @@
                 gridcolor: '#1e293b'
             },
             margin: { t: 20, b: 60, l: 60, r: 60 },
-            barmode: 'group'
+            barmode: 'group',
+            autosize: true
         };
 
-        Plotly.newPlot('modelComparison', [mapeTrace, rmseTrace], comparisonLayout, {responsive: true});
+        Plotly.newPlot('modelComparison', [mapeTrace, rmseTrace], comparisonLayout, {responsive: true, displayModeBar: false});
     </script>
 </body>
 </html>

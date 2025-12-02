@@ -77,6 +77,12 @@
             padding: 1.5rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .chart-container > div {
+            max-width: 100%;
+            height: 400px !important;
         }
         .project-description {
             background: var(--dark-card);
@@ -221,11 +227,12 @@
             font: { color: '#cbd5e1' },
             xaxis: { gridcolor: '#1e293b' },
             yaxis: { gridcolor: '#1e293b', tickformat: '$,.0f' },
-            margin: { t: 20, b: 40, l: 60, r: 20 },
-            hovermode: 'x unified'
+            margin: { t: 20, b: 60, l: 60, r: 20 },
+            hovermode: 'x unified',
+            autosize: true
         };
 
-        Plotly.newPlot('revenueTrend', [revenueTrace1, revenueTrace2], revenueLayout, {responsive: true});
+        Plotly.newPlot('revenueTrend', [revenueTrace1, revenueTrace2], revenueLayout, {responsive: true, displayModeBar: false});
 
         // Sales by Region Chart
         const regions = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East'];
@@ -246,10 +253,11 @@
             font: { color: '#cbd5e1' },
             xaxis: { gridcolor: '#1e293b' },
             yaxis: { gridcolor: '#1e293b', tickformat: '$,.0f' },
-            margin: { t: 20, b: 60, l: 60, r: 20 }
+            margin: { t: 20, b: 60, l: 60, r: 20 },
+            autosize: true
         };
 
-        Plotly.newPlot('salesByRegion', [regionTrace], regionLayout, {responsive: true});
+        Plotly.newPlot('salesByRegion', [regionTrace], regionLayout, {responsive: true, displayModeBar: false});
 
         // Product Performance Chart
         const products = ['Product A', 'Product B', 'Product C', 'Product D', 'Product E', 'Product F'];
@@ -272,10 +280,11 @@
             font: { color: '#cbd5e1' },
             xaxis: { gridcolor: '#1e293b', tickformat: '$,.0f' },
             yaxis: { gridcolor: '#1e293b' },
-            margin: { t: 20, b: 40, l: 100, r: 20 }
+            margin: { t: 20, b: 40, l: 100, r: 20 },
+            autosize: true
         };
 
-        Plotly.newPlot('productPerformance', [productTrace], productLayout, {responsive: true});
+        Plotly.newPlot('productPerformance', [productTrace], productLayout, {responsive: true, displayModeBar: false});
     </script>
 </body>
 </html>

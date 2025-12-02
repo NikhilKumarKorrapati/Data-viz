@@ -52,6 +52,12 @@
             padding: 1.5rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .chart-container > div {
+            max-width: 100%;
+            height: 400px !important;
         }
         .project-description {
             background: var(--dark-card);
@@ -190,10 +196,11 @@
             font: { color: '#cbd5e1' },
             xaxis: { gridcolor: '#1e293b' },
             yaxis: { title: 'Total Cases', gridcolor: '#1e293b' },
-            margin: { t: 20, b: 60, l: 60, r: 20 }
+            margin: { t: 20, b: 60, l: 60, r: 20 },
+            autosize: true
         };
 
-        Plotly.newPlot('trendChart', [trendTrace], trendLayout, {responsive: true});
+        Plotly.newPlot('trendChart', [trendTrace], trendLayout, {responsive: true, displayModeBar: false});
 
         // Regional Comparison
         const regions = ['Northeast', 'Southeast', 'Midwest', 'Southwest', 'West'];
@@ -215,10 +222,11 @@
             font: { color: '#cbd5e1' },
             xaxis: { gridcolor: '#1e293b' },
             yaxis: { title: 'Total Cases', gridcolor: '#1e293b' },
-            margin: { t: 20, b: 60, l: 60, r: 20 }
+            margin: { t: 20, b: 60, l: 60, r: 20 },
+            autosize: true
         };
 
-        Plotly.newPlot('regionalChart', [regionalTrace], regionalLayout, {responsive: true});
+        Plotly.newPlot('regionalChart', [regionalTrace], regionalLayout, {responsive: true, displayModeBar: false});
     </script>
 </body>
 </html>
