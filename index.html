@@ -3,142 +3,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nikhil Kumar Korrapati - Data Visualization Portfolio">
+    <meta name="description" content="Nikhil Kumar Korrapati - Data Visualization & Analytics Portfolio">
     <title>Nikhil Kumar Korrapati | Data Visualization Portfolio</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=3.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=4.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <h1 class="site-title">Nikhil Kumar Korrapati</h1>
-                <nav class="main-nav">
-                    <a href="#about">About</a>
-                    <a href="#work">Work</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-            </div>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">NK</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="container">
+        <div class="hero-container">
             <div class="hero-content">
-                <h2 class="hero-title">Data Visualization Portfolio</h2>
-                <p class="hero-subtitle">Analytics Storyteller | Data Engineer | Visualization Specialist</p>
+                <p class="hero-label">Data Storyteller & Visualization Specialist</p>
+                <h1 class="hero-title">Nikhil Kumar<br>Korrapati</h1>
+                <p class="hero-description">Transforming complex data into compelling visual narratives that drive business decisions. Master's candidate in Business Analytics & AI with expertise in modern data engineering.</p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <span>Scroll Down</span>
+                <i class="fas fa-arrow-down"></i>
             </div>
         </div>
     </section>
-
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About</h2>
-            <div class="about-text">
-                <p>I am a data engineer by trade and a business analytics leader in the making. I build and orchestrate modern data stacks with Snowflake, Azure Data Factory, and Apache Airflow.</p>
-                <p>I'm pursuing a part-time Master's in Business Analytics and AI to expand my impact from pipelines to boardroom insights. This portfolio captures the experiments, assignments, and narrative visualizations that trace this transition from technical implementation to strategic storytelling.</p>
+            <div class="section-header">
+                <span class="section-label">About Me</span>
+                <h2 class="section-title">Building Data Products That Matter</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-content">
+                    <p class="lead">I am a data engineer by trade and a business analytics leader in the making.</p>
+                    <p>I build and orchestrate modern data stacks with <strong>Snowflake</strong>, <strong>Azure Data Factory</strong>, and <strong>Apache Airflow</strong>. Currently pursuing a part-time Master's in Business Analytics and AI to expand my impact from pipelines to boardroom insights.</p>
+                    <p>My approach combines technical precision with narrative clarity—creating visualizations that don't just display data, but tell stories that drive action.</p>
+                    
+                    <div class="highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Data Visualization</h4>
+                                <p>Interactive dashboards and narrative storytelling</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <h4>Data Engineering</h4>
+                                <p>Modern data stacks and pipeline orchestration</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <h4>Business Analytics</h4>
+                                <p>Strategic insights powered by AI and ML</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <h3>15+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>8+</h3>
+                        <p>Technologies Mastered</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>3</h3>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="work" class="projects">
+    <!-- Featured Work Section -->
+    <section id="work" class="featured-work">
         <div class="container">
-            <h2 class="section-title">Selected Work</h2>
-            
-            <div class="projects-grid">
-                <!-- Project 1: Minard -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://raw.githubusercontent.com/NikhilKumarKorrapati/Data-viz/main/Assignments/Minard/minard-preview.png" alt="Minard's March Visualization" onerror="this.src='https://via.placeholder.com/800x600/f8f9fa/495057?text=Minard+March+Visualization'">
+            <div class="section-header">
+                <span class="section-label">Portfolio</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+
+            <!-- Featured Project 1: Minard -->
+            <div class="featured-project">
+                <div class="featured-project-image">
+                    <img src="https://raw.githubusercontent.com/NikhilKumarKorrapati/Data-viz/main/Assignments/Minard/minard-preview.png" alt="Minard's March" onerror="this.src='https://via.placeholder.com/1200x800/667eea/ffffff?text=Minard+Napoleon+March+Visualization'">
+                    <div class="project-number">01</div>
+                </div>
+                <div class="featured-project-content">
+                    <div class="project-category">Interactive Visualization • Geospatial Analysis</div>
+                    <h3>Minard's Napoleon March Reimagined</h3>
+                    <p>A modern interpretation of Charles Minard's iconic 1861 flow map, visualizing Napoleon's catastrophic 1812 Russian campaign. This project layers troop strength, temperature data, and geography into interactive 3D visualizations using Python, Folium, and Plotly.</p>
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Tools</span>
+                            <span class="detail-value">Python, Folium, Plotly, Pandas</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Type</span>
+                            <span class="detail-value">Academic Research</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Year</span>
+                            <span class="detail-value">2024</span>
+                        </div>
                     </div>
-                    <div class="project-info">
-                        <h3>Minard's Napoleon March Reimagined</h3>
-                        <p>Interactive geospatial visualization of Napoleon's 1812 Russian campaign using Python, Folium, and Plotly</p>
-                        <div class="project-tags">
+                    <div class="project-links">
+                        <a href="projects/minard-viewer.html" class="btn btn-primary">View Project</a>
+                        <a href="Assignments/Minard/Minard.ipynb" class="btn btn-outline" target="_blank">View Notebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Project 2: Financial Lifestyle -->
+            <div class="featured-project reverse">
+                <div class="featured-project-image">
+                    <img src="https://via.placeholder.com/1200x800/f093fb/ffffff?text=Financial+Lifestyle+Analysis" alt="Financial Lifestyle">
+                    <div class="project-number">02</div>
+                </div>
+                <div class="featured-project-content">
+                    <div class="project-category">Data Storytelling • Financial Analysis</div>
+                    <h3>Financial Choices & Lifestyle Balance</h3>
+                    <p>An emotionally resonant data story exploring how financial habits shape our lives. This narrative visualization contrasts two individuals' lifestyles to reveal that high income doesn't always equal success—examining affordability, burnout, social pressure, and the hidden costs of modern lifestyle choices.</p>
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Tools</span>
+                            <span class="detail-value">Tableau, Adobe Illustrator</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Type</span>
+                            <span class="detail-value">Narrative Visualization</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Year</span>
+                            <span class="detail-value">2024</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="Assignments/Assignment-1.pdf" class="btn btn-primary" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Project 3: Nutrition -->
+            <div class="featured-project">
+                <div class="featured-project-image">
+                    <img src="https://via.placeholder.com/1200x800/4facfe/ffffff?text=Nutrition+Infographic" alt="Nutrition Infographic">
+                    <div class="project-number">03</div>
+                </div>
+                <div class="featured-project-content">
+                    <div class="project-category">Infographic Design • Public Health</div>
+                    <h3>The Hidden Truth of Ultra-Processed Foods</h3>
+                    <p>An eye-opening infographic revealing the hidden dangers of ultra-processed foods in our modern diet. This visual investigation explores nutrition science, health impacts, and the prevalence of processed ingredients in everyday meals—designed to raise public awareness about food choices.</p>
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Tools</span>
+                            <span class="detail-value">Adobe Illustrator, Figma</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Type</span>
+                            <span class="detail-value">Infographic</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Year</span>
+                            <span class="detail-value">2024</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="Assignments/Assignment-3.pdf" class="btn btn-primary" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Projects Gallery -->
+    <section class="projects-gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">All Work</span>
+                <h2 class="section-title">Complete Portfolio</h2>
+            </div>
+
+            <!-- Filter -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Projects</button>
+                <button class="filter-tab" data-filter="interactive">Interactive</button>
+                <button class="filter-tab" data-filter="dashboard">Dashboards</button>
+                <button class="filter-tab" data-filter="storytelling">Storytelling</button>
+                <button class="filter-tab" data-filter="geospatial">Geospatial</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="gallery-grid">
+                <!-- Project Cards -->
+                <div class="gallery-card" data-category="interactive geospatial">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/667eea/ffffff?text=Minard+March" alt="Minard Project">
+                    </div>
+                    <div class="card-content">
+                        <h4>Minard's Napoleon March</h4>
+                        <p>Interactive geospatial visualization of historic military campaign</p>
+                        <div class="card-tags">
                             <span>Python</span>
                             <span>Folium</span>
                             <span>Plotly</span>
-                            <span>Geospatial</span>
                         </div>
-                        <div class="project-links">
-                            <a href="projects/minard-viewer.html" class="btn-link">View Project →</a>
-                            <a href="Assignments/Minard/Minard.ipynb" class="btn-link" target="_blank">Notebook →</a>
-                        </div>
+                        <a href="projects/minard-viewer.html" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
-                <!-- Project 2: Financial Lifestyle -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/800x600/f8f9fa/495057?text=Financial+Lifestyle+Analysis" alt="Financial Lifestyle Visualization">
+                <div class="gallery-card" data-category="storytelling">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/f093fb/ffffff?text=Financial+Lifestyle" alt="Financial Analysis">
                     </div>
-                    <div class="project-info">
-                        <h3>Financial Choices & Lifestyle Balance</h3>
-                        <p>Data storytelling exploring how financial habits shape our lives, contrasting lifestyle choices and hidden costs</p>
-                        <div class="project-tags">
+                    <div class="card-content">
+                        <h4>Financial Lifestyle Balance</h4>
+                        <p>Data storytelling on financial habits and lifestyle choices</p>
+                        <div class="card-tags">
+                            <span>Tableau</span>
                             <span>Storytelling</span>
-                            <span>Financial Analysis</span>
-                            <span>Lifestyle</span>
                         </div>
-                        <div class="project-links">
-                            <a href="Assignments/Assignment-1.pdf" class="btn-link" target="_blank">View PDF →</a>
-                        </div>
+                        <a href="Assignments/Assignment-1.pdf" class="card-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
-                <!-- Project 3: Nutrition Infographic -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/800x600/f8f9fa/495057?text=Nutrition+Infographic" alt="Nutrition Infographic">
+                <div class="gallery-card" data-category="storytelling">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/4facfe/ffffff?text=Nutrition+Study" alt="Nutrition Infographic">
                     </div>
-                    <div class="project-info">
-                        <h3>The Hidden Truth of Ultra-Processed Foods</h3>
-                        <p>Infographic revealing the hidden dangers of ultra-processed foods and their impact on modern health</p>
-                        <div class="project-tags">
+                    <div class="card-content">
+                        <h4>Ultra-Processed Foods Study</h4>
+                        <p>Public health infographic on modern nutrition challenges</p>
+                        <div class="card-tags">
                             <span>Infographic</span>
-                            <span>Health</span>
-                            <span>Public Awareness</span>
+                            <span>Design</span>
                         </div>
-                        <div class="project-links">
-                            <a href="Assignments/Assignment-3.pdf" class="btn-link" target="_blank">View PDF →</a>
+                        <a href="Assignments/Assignment-3.pdf" class="card-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-category="dashboard interactive">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/00f2fe/ffffff?text=Sales+Dashboard" alt="Sales Dashboard">
+                    </div>
+                    <div class="card-content">
+                        <h4>Executive Sales Dashboard</h4>
+                        <p>Real-time KPI tracking and predictive analytics</p>
+                        <div class="card-tags">
+                            <span>Tableau</span>
+                            <span>BI</span>
                         </div>
+                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-category="interactive dashboard">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/ffa400/ffffff?text=Customer+Segmentation" alt="Customer Segmentation">
+                    </div>
+                    <div class="card-content">
+                        <h4>Customer Segmentation Analysis</h4>
+                        <p>ML-powered clustering for behavioral insights</p>
+                        <div class="card-tags">
+                            <span>Python</span>
+                            <span>ML</span>
+                        </div>
+                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-category="interactive">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/a8e6cf/ffffff?text=Time+Series+Analysis" alt="Time Series">
+                    </div>
+                    <div class="card-content">
+                        <h4>Demand Forecasting Model</h4>
+                        <p>ARIMA and Prophet models for predictive analytics</p>
+                        <div class="card-tags">
+                            <span>R</span>
+                            <span>Forecasting</span>
+                        </div>
+                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-category="interactive">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/ff6b6b/ffffff?text=Network+Analysis" alt="Network Analysis">
+                    </div>
+                    <div class="card-content">
+                        <h4>Social Network Visualization</h4>
+                        <p>D3.js force-directed graph with community detection</p>
+                        <div class="card-tags">
+                            <span>D3.js</span>
+                            <span>Network</span>
+                        </div>
+                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="gallery-card" data-category="geospatial interactive">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/600x400/c7ceea/ffffff?text=COVID+Analysis" alt="COVID Analysis">
+                    </div>
+                    <div class="card-content">
+                        <h4>COVID-19 Impact Analysis</h4>
+                        <p>Geospatial tracking of pandemic spread patterns</p>
+                        <div class="card-tags">
+                            <span>GIS</span>
+                            <span>Choropleth</span>
+                        </div>
+                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Skills & Tools</h2>
-            
+            <div class="section-header">
+                <span class="section-label">Expertise</span>
+                <h2 class="section-title">Skills & Technologies</h2>
+            </div>
             <div class="skills-grid">
-                <div class="skill-group">
-                    <h3>Visualization</h3>
-                    <p>Python (Matplotlib, Seaborn, Plotly, Altair), Tableau, Power BI, D3.js, Folium</p>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Data Visualization</h3>
+                    <div class="skill-list">
+                        <span>Python (Matplotlib, Seaborn, Plotly, Altair)</span>
+                        <span>Tableau</span>
+                        <span>Power BI</span>
+                        <span>D3.js</span>
+                        <span>Folium</span>
+                        <span>Adobe Illustrator</span>
+                    </div>
                 </div>
 
-                <div class="skill-group">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
                     <h3>Data Engineering</h3>
-                    <p>Snowflake, Azure Data Factory, Apache Airflow, SQL, ETL Pipelines</p>
+                    <div class="skill-list">
+                        <span>Snowflake</span>
+                        <span>Azure Data Factory</span>
+                        <span>Apache Airflow</span>
+                        <span>SQL (PostgreSQL, MySQL)</span>
+                        <span>ETL Pipelines</span>
+                        <span>Data Modeling</span>
+                    </div>
                 </div>
 
-                <div class="skill-group">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
                     <h3>Programming</h3>
-                    <p>Python, R, JavaScript, Pandas, NumPy, Scikit-learn</p>
+                    <div class="skill-list">
+                        <span>Python</span>
+                        <span>R</span>
+                        <span>JavaScript</span>
+                        <span>Pandas & NumPy</span>
+                        <span>Scikit-learn</span>
+                        <span>Git & GitHub</span>
+                    </div>
                 </div>
 
-                <div class="skill-group">
-                    <h3>Analytics</h3>
-                    <p>Machine Learning, Statistical Analysis, Predictive Modeling, Time Series</p>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Analytics & ML</h3>
+                    <div class="skill-list">
+                        <span>Machine Learning</span>
+                        <span>Statistical Analysis</span>
+                        <span>Predictive Modeling</span>
+                        <span>Time Series Forecasting</span>
+                        <span>A/B Testing</span>
+                        <span>Business Intelligence</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Geospatial Analysis</h3>
+                    <div class="skill-list">
+                        <span>GIS Mapping</span>
+                        <span>Choropleth Maps</span>
+                        <span>Location Analytics</span>
+                        <span>Spatial Statistics</span>
+                        <span>Geocoding</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>Storytelling</h3>
+                    <div class="skill-list">
+                        <span>Narrative Visualization</span>
+                        <span>Infographic Design</span>
+                        <span>Presentation Design</span>
+                        <span>Stakeholder Communication</span>
+                        <span>Data Journalism</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,16 +450,33 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
             <div class="contact-content">
-                <p>nikhil.korrapati@example.com</p>
-                <div class="social-links">
-                    <a href="https://github.com/NikhilKumarKorrapati" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="https://linkedin.com/in/nikhilkorrapati" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
+                <div class="contact-info">
+                    <span class="section-label">Get In Touch</span>
+                    <h2>Let's Create Something Amazing Together</h2>
+                    <p>I'm always interested in hearing about new projects and opportunities. Whether you need a data visualization specialist, a data engineer, or someone who can bridge the gap between data and decision-makers—let's talk.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:nikhil.korrapati@example.com">nikhil.korrapati@example.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://linkedin.com/in/nikhilkorrapati" target="_blank">linkedin.com/in/nikhilkorrapati</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/NikhilKumarKorrapati" target="_blank">github.com/NikhilKumarKorrapati</a>
+                        </div>
+                    </div>
+
+                    <div class="social-icons">
+                        <a href="https://github.com/NikhilKumarKorrapati" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/nikhilkorrapati" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:nikhil.korrapati@example.com"><i class="fas fa-envelope"></i></a>
+                        <a href="https://twitter.com/nikhilkorrapati" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,7 +485,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Nikhil Kumar Korrapati</p>
+            <div class="footer-content">
+                <p>&copy; 2024 Nikhil Kumar Korrapati. All rights reserved.</p>
+                <p>Crafted with passion for data storytelling</p>
+            </div>
         </div>
     </footer>
 
