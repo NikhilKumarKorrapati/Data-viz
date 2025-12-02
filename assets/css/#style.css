@@ -195,6 +195,20 @@ main {
     color: var(--text-soft);
 }
 
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.about-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -356,6 +370,26 @@ main {
     box-shadow: 0 30px 60px rgba(8, 15, 30, 0.55);
 }
 
+.section--stories {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: calc(var(--radius) * 1.1);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    padding: clamp(3rem, 5vw, 4rem);
+    box-shadow: var(--shadow);
+}
+
+.storyline-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 1.1rem;
+    color: var(--text-muted);
+}
+
+.storyline-list strong {
+    color: var(--text);
+}
+
 .highlight-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -368,6 +402,46 @@ main {
     border-radius: var(--radius);
     border: 1px solid rgba(148, 163, 184, 0.18);
     backdrop-filter: blur(12px);
+}
+
+.assignments-grid {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.assignment-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.assignment-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.assignment-links a {
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    transition: transform var(--transition), border-color var(--transition);
+}
+
+.assignment-links a:hover,
+.assignment-links a:focus {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.75);
+    text-decoration: none;
 }
 
 .section--contact {
@@ -430,7 +504,9 @@ main {
     .insights-grid,
     .process-list,
     .highlight-grid,
-    .contact-card {
+    .contact-card,
+    .about-grid,
+    .assignments-grid {
         grid-template-columns: 1fr;
     }
 
