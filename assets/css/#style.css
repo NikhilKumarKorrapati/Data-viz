@@ -39,12 +39,14 @@ body {
     color: var(--dark);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    text-align: left;
 }
 
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 24px;
+    text-align: left;
 }
 
 /* ==================== NAVBAR ==================== */
@@ -133,6 +135,10 @@ body {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 24px;
+}
+
+.hero-content {
+    text-align: left;
 }
 
 .hero-badge {
@@ -457,6 +463,10 @@ body {
     grid-template-columns: 1.5fr 1fr;
     gap: 80px;
     align-items: start;
+}
+
+.about-content {
+    text-align: left;
 }
 
 .about-content h2 {
