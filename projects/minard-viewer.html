@@ -462,24 +462,10 @@
                 });
             });
 
-            // Temperature trace
-            const tempTrace = {
-                x: tempClean.map(t => t.date),
-                y: tempClean.map(t => t.temp),
-                type: 'scatter',
-                mode: 'lines+markers',
-                name: 'Temperature',
-                line: { color: 'blue', width: 4 },
-                marker: { size: 15 },
-                xaxis: 'x2',
-                yaxis: 'y2'
-            };
-
-            const allTraces = [...traces, tempTrace];
+            const allTraces = [...traces];
 
             const layout = {
                 title: "Napoleon's 1812 Campaign - Comprehensive Analysis",
-                grid: { rows: 2, columns: 1, pattern: 'independent' },
                 height: 1200,
                 showlegend: true,
                 paper_bgcolor: '#1a1a2e',
@@ -532,6 +518,20 @@
             };
 
             Plotly.newPlot('dashboard', allTraces, layout);
+
+            // Add temperature trace separately to second subplot
+            Plotly.addTraces('dashboard', [{
+                x: tempClean.map(t => t.date),
+                y: tempClean.map(t => t.temp),
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: 'Temperature',
+                line: { color: 'blue', width: 4 },
+                marker: { size: 15, color: 'blue' },
+                xaxis: 'x2',
+                yaxis: 'y2',
+                hovertemplate: 'Date: %{x}<br>Temperature: %{y}°C<extra></extra>'
+            }]);
         }
 
         // Temperature Analysis
