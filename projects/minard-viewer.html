@@ -202,57 +202,41 @@
                     <p>While Minard's original map presented a single, powerful narrative, these modern visualizations empower you to interact with the data, explore multiple perspectives, and uncover new insights about this pivotal historical event.</p>
                 </div>
 
-                <!-- Tab Navigation -->
-                <div class="tab-navigation">
-                    <button class="tab-btn active" onclick="showTab('map')">
-                        <i class="fas fa-map-marked-alt"></i> Interactive Map
-                    </button>
-                    <button class="tab-btn" onclick="showTab('dashboard')">
-                        <i class="fas fa-chart-bar"></i> Dashboard
-                    </button>
-                    <button class="tab-btn" onclick="showTab('temperature')">
-                        <i class="fas fa-temperature-low"></i> Temperature Analysis
-                    </button>
-                    <button class="tab-btn" onclick="showTab('simplified')">
-                        <i class="fas fa-dot-circle"></i> Simplified View
-                    </button>
-                </div>
-
-                <!-- Tab 1: Interactive Map -->
-                <div id="map-tab" class="tab-content active">
-                    <h3 style="color: var(--text-primary);">1. Interactive Geographic Map</h3>
+                <!-- Visualization 1: Interactive Map -->
+                <div style="margin-bottom: 4rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">1. Interactive Geographic Map</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        Navigate the campaign route with interactive zoom and pan features. Click on locations for detailed information.
+                        Navigate the campaign route with interactive zoom and pan features. Click on locations for detailed information about troop movements, cities, and rivers.
                     </p>
-                    <div id="map" class="loading">Loading map data...</div>
+                    <div id="map"></div>
                 </div>
 
-                <!-- Tab 2: Analytical Dashboard -->
-                <div id="dashboard-tab" class="tab-content">
-                    <h3 style="color: var(--text-primary);">2. Analytical Dashboard</h3>
+                <!-- Visualization 2: Analytical Dashboard -->
+                <div style="margin-bottom: 4rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">2. Analytical Dashboard</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem;">
                         Comprehensive analysis of troop losses, temperature changes, and group survival rates.
                     </p>
-                    <div id="dashboard" class="viz-container loading">Loading dashboard...</div>
+                    <div id="dashboard" class="viz-container"></div>
                 </div>
 
-                <!-- Tab 3: Temperature Analysis -->
-                <div id="temperature-tab" class="tab-content">
-                    <h3 style="color: var(--text-primary);">3. Temperature Impact Analysis</h3>
+                <!-- Visualization 3: Temperature Analysis -->
+                <div style="margin-bottom: 4rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">3. Temperature Impact Analysis</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        Visualize the direct relationship between temperature drops and army losses.
+                        Visualize the direct relationship between temperature drops and army losses during the retreat.
                     </p>
-                    <div id="temperature" class="viz-container loading">Loading temperature analysis...</div>
-                    <div id="temperature-timeline" class="viz-container loading">Loading temperature timeline...</div>
+                    <div id="temperature" class="viz-container"></div>
+                    <div id="temperature-timeline" class="viz-container" style="margin-top: 2rem;"></div>
                 </div>
 
-                <!-- Tab 4: Simplified Map -->
-                <div id="simplified-tab" class="tab-content">
-                    <h3 style="color: var(--text-primary);">4. Simplified Campaign Map</h3>
+                <!-- Visualization 4: Simplified Map -->
+                <div style="margin-bottom: 4rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">4. Simplified Campaign Map</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        Quick pattern identification using colored dots representing army positions and sizes.
+                        Quick pattern identification using colored dots representing army positions and sizes at key locations.
                     </p>
-                    <div id="simplified" class="viz-container loading">Loading simplified view...</div>
+                    <div id="simplified" class="viz-container"></div>
                 </div>
 
                 <div class="cta-buttons">
@@ -333,32 +317,6 @@
 
     <script src="../assets/js/script.js"></script>
     <script>
-        // Tab switching functionality
-        function showTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName + '-tab').classList.add('active');
-            event.target.classList.add('active');
-            
-            // Load visualization if not loaded yet
-            if (tabName === 'map' && !window.mapLoaded) {
-                loadMap();
-            } else if (tabName === 'dashboard' && !window.dashboardLoaded) {
-                loadDashboard();
-            } else if (tabName === 'temperature' && !window.temperatureLoaded) {
-                loadTemperature();
-            } else if (tabName === 'simplified' && !window.simplifiedLoaded) {
-                loadSimplified();
-            }
-        }
-
         // Load CSV data
         let troopsData, citiesData, tempData, riversData;
 
@@ -376,20 +334,27 @@
                 tempData = Papa.parse(temp, { header: true, dynamicTyping: true }).data;
                 riversData = Papa.parse(rivers, { header: true, dynamicTyping: true }).data;
 
-                // Load first visualization
+                // Load all visualizations
                 loadMap();
+                loadDashboard();
+                loadTemperature();
+                loadSimplified();
             } catch (error) {
                 console.error('Error loading data:', error);
+                document.getElementById('map').innerHTML = '<p style="color: red; text-align: center; padding: 2rem;">Error loading data. Please check file paths.</p>';
             }
         }
 
         // Interactive Map with Leaflet
         function loadMap() {
-            if (window.mapLoaded) return;
-            window.mapLoaded = true;
+            const validTroops = troopsData.filter(d => d.lat && d.long);
+            if (validTroops.length === 0) {
+                document.getElementById('map').innerHTML = '<p style="color: red; text-align: center; padding: 2rem;">No valid troop data found.</p>';
+                return;
+            }
 
-            const centerLat = troopsData.reduce((sum, d) => sum + d.lat, 0) / troopsData.length;
-            const centerLon = troopsData.reduce((sum, d) => sum + d.long, 0) / troopsData.length;
+            const centerLat = validTroops.reduce((sum, d) => sum + d.lat, 0) / validTroops.length;
+            const centerLon = validTroops.reduce((sum, d) => sum + d.long, 0) / validTroops.length;
 
             const map = L.map('map').setView([centerLat, centerLon], 6);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -400,7 +365,7 @@
 
             // Group data by group and direction
             const groupedData = {};
-            troopsData.forEach(row => {
+            validTroops.forEach(row => {
                 const key = `${row.group}-${row.direction}`;
                 if (!groupedData[key]) groupedData[key] = [];
                 groupedData[key].push(row);
@@ -410,11 +375,11 @@
             Object.entries(groupedData).forEach(([key, data]) => {
                 const [group, direction] = key.split('-');
                 const coords = data.map(d => [d.lat, d.long]);
-                const avgSurvivors = data.reduce((sum, d) => sum + d.survivors, 0) / data.length;
+                const avgSurvivors = data.reduce((sum, d) => sum + (d.survivors || 0), 0) / data.length;
                 const lineWidth = Math.max(2, Math.min(20, avgSurvivors / 10000));
 
                 L.polyline(coords, {
-                    color: colors[direction],
+                    color: colors[direction] || '#000000',
                     weight: lineWidth,
                     opacity: 0.8
                 }).bindPopup(`Group ${group} - ${direction}<br>Avg Survivors: ${Math.round(avgSurvivors).toLocaleString()}`)
@@ -422,7 +387,7 @@
             });
 
             // Add city markers
-            citiesData.filter(c => c.city).forEach(city => {
+            citiesData.filter(c => c.city && c.lat && c.long).forEach(city => {
                 L.circleMarker([city.lat, city.long], {
                     radius: 8,
                     fillColor: 'yellow',
@@ -430,13 +395,13 @@
                     weight: 2,
                     opacity: 1,
                     fillOpacity: 0.7
-                }).bindPopup(`<b>${city.city}</b><br>Survivors: ${city.survivors.toLocaleString()}`)
+                }).bindPopup(`<b>${city.city}</b><br>Survivors: ${(city.survivors || 0).toLocaleString()}`)
                   .addTo(map);
             });
 
             // Add rivers
             const riverGroups = {};
-            riversData.forEach(r => {
+            riversData.filter(r => r.name && r.lat && r.long).forEach(r => {
                 if (!riverGroups[r.name]) riverGroups[r.name] = [];
                 riverGroups[r.name].push([r.lat, r.long]);
             });
@@ -450,18 +415,13 @@
                     }).bindPopup(`${name} River`).addTo(map);
                 }
             });
-
-            document.getElementById('map').classList.remove('loading');
         }
 
         // Dashboard
         function loadDashboard() {
-            if (window.dashboardLoaded) return;
-            window.dashboardLoaded = true;
-
             // Calculate losses by city
             const cityLosses = [];
-            const namedCities = citiesData.filter(c => c.city);
+            const namedCities = citiesData.filter(c => c.city && c.survivors !== null);
             
             for (let i = 0; i < namedCities.length; i++) {
                 const city = namedCities[i];
@@ -481,14 +441,14 @@
 
             // Group losses
             const groupLosses = [];
-            const groups = [...new Set(troopsData.map(d => d.group))];
+            const groups = [...new Set(troopsData.map(d => d.group).filter(g => g))];
             groups.forEach(group => {
                 const groupData = troopsData.filter(d => d.group === group);
                 const advance = groupData.filter(d => d.direction === 'Advance');
                 const retreat = groupData.filter(d => d.direction === 'Retreat');
                 
-                const startSize = advance.length > 0 ? Math.max(...advance.map(d => d.survivors)) : 0;
-                const endSize = retreat.length > 0 ? Math.min(...retreat.map(d => d.survivors)) : startSize;
+                const startSize = advance.length > 0 ? Math.max(...advance.map(d => d.survivors || 0)) : 0;
+                const endSize = retreat.length > 0 ? Math.min(...retreat.map(d => d.survivors || 0)) : startSize;
                 
                 groupLosses.push({
                     group: `Group ${group}`,
@@ -535,27 +495,25 @@
             };
 
             Plotly.newPlot('dashboard', [trace1, trace2, trace3], layout);
-            document.getElementById('dashboard').classList.remove('loading');
         }
 
         // Temperature Analysis
         function loadTemperature() {
-            if (window.temperatureLoaded) return;
-            window.temperatureLoaded = true;
-
             const tempClean = tempData.filter(t => t.temp !== null && t.temp !== undefined);
-            const retreat = troopsData.filter(d => d.direction === 'Retreat');
+            const retreat = troopsData.filter(d => d.direction === 'Retreat' && d.survivors);
 
             // Correlation
             const correlationPoints = [];
             tempClean.forEach(temp => {
-                const closest = retreat.reduce((prev, curr) => 
-                    Math.abs(curr.long - temp.long) < Math.abs(prev.long - temp.long) ? curr : prev
-                );
-                correlationPoints.push({
-                    temp: temp.temp,
-                    army: closest.survivors
-                });
+                if (retreat.length > 0) {
+                    const closest = retreat.reduce((prev, curr) => 
+                        Math.abs(curr.long - temp.long) < Math.abs(prev.long - temp.long) ? curr : prev
+                    );
+                    correlationPoints.push({
+                        temp: temp.temp,
+                        army: closest.survivors
+                    });
+                }
             });
 
             const trace1 = {
@@ -604,16 +562,11 @@
             };
 
             Plotly.newPlot('temperature-timeline', [trace2], layout2);
-            document.getElementById('temperature').classList.remove('loading');
-            document.getElementById('temperature-timeline').classList.remove('loading');
         }
 
         // Simplified View
         function loadSimplified() {
-            if (window.simplifiedLoaded) return;
-            window.simplifiedLoaded = true;
-
-            const namedCities = citiesData.filter(c => c.city);
+            const namedCities = citiesData.filter(c => c.city && c.lat && c.long && c.survivors !== null);
 
             const trace = {
                 type: 'scattergeo',
@@ -647,10 +600,9 @@
             };
 
             Plotly.newPlot('simplified', [trace], layout);
-            document.getElementById('simplified').classList.remove('loading');
         }
 
-        // Initialize
+        // Initialize - load all data when page loads
         window.addEventListener('load', loadAllData);
     </script>
 </body>
