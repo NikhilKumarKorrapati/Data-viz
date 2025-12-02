@@ -419,27 +419,10 @@
 
         // Dashboard
         function loadDashboard() {
-            // Calculate losses by city
-            const cityLosses = [];
-            const namedCities = citiesData.filter(c => c.city && c.survivors !== null);
-            
-            for (let i = 0; i < namedCities.length; i++) {
-                const city = namedCities[i];
-                const prevSurvivors = i > 0 ? namedCities[i-1].survivors : city.survivors;
-                const losses = Math.max(0, prevSurvivors - city.survivors);
-                cityLosses.push({
-                    city: city.city,
-                    losses: losses,
-                    survivors: city.survivors
-                });
-            }
-
-            cityLosses.sort((a, b) => b.losses - a.losses);
-
             // Temperature data
             const tempClean = tempData.filter(t => t.temp !== null && t.temp !== undefined);
 
-            // Group losses
+            // Group losses - Line graph showing survival journey
             const groupLosses = [];
             const groups = [...new Set(troopsData.map(d => d.group).filter(g => g))];
             groups.forEach(group => {
@@ -451,50 +434,104 @@
                 const endSize = retreat.length > 0 ? Math.min(...retreat.map(d => d.survivors || 0)) : startSize;
                 
                 groupLosses.push({
-                    group: `Group ${group}`,
+                    group: group,
                     start: startSize,
                     end: endSize,
                     losses: startSize - endSize
                 });
             });
 
-            const trace1 = {
-                x: cityLosses.map(c => c.city),
-                y: cityLosses.map(c => c.losses),
-                type: 'bar',
-                name: 'Troop Losses',
-                marker: { color: 'crimson' }
-            };
+            const groupColors = ['#FF6B6B', '#4ECDC4', '#45B7D1'];
+            const traces = [];
 
-            const trace2 = {
+            // Create line graph traces for each group
+            groupLosses.forEach((groupData, index) => {
+                traces.push({
+                    x: ['Campaign Start', 'Campaign End'],
+                    y: [groupData.start, groupData.end],
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    name: `Group ${groupData.group}`,
+                    line: { color: groupColors[index], width: 8 },
+                    marker: { 
+                        size: 20, 
+                        color: groupColors[index],
+                        line: { width: 4, color: 'white' }
+                    },
+                    hovertemplate: `Group ${groupData.group}<br>%{x}: %{y:,} soldiers<br>Total Loss: ${groupData.losses.toLocaleString()}<extra></extra>`
+                });
+            });
+
+            // Temperature trace
+            const tempTrace = {
                 x: tempClean.map(t => t.date),
                 y: tempClean.map(t => t.temp),
                 type: 'scatter',
                 mode: 'lines+markers',
                 name: 'Temperature',
                 line: { color: 'blue', width: 4 },
-                marker: { size: 15 }
+                marker: { size: 15 },
+                xaxis: 'x2',
+                yaxis: 'y2'
             };
 
-            const trace3 = {
-                x: groupLosses.map(g => g.group),
-                y: groupLosses.map(g => g.losses),
-                type: 'bar',
-                name: 'Group Losses',
-                marker: { color: ['#FF6B6B', '#4ECDC4', '#45B7D1'] }
-            };
+            const allTraces = [...traces, tempTrace];
 
             const layout = {
                 title: "Napoleon's 1812 Campaign - Comprehensive Analysis",
-                grid: { rows: 3, columns: 1, pattern: 'independent' },
+                grid: { rows: 2, columns: 1, pattern: 'independent' },
                 height: 1200,
-                showlegend: false,
+                showlegend: true,
                 paper_bgcolor: '#1a1a2e',
                 plot_bgcolor: '#1a1a2e',
-                font: { color: '#e0e0e0' }
+                font: { color: '#e0e0e0' },
+                xaxis: { 
+                    title: 'Campaign Phase',
+                    domain: [0, 1],
+                    anchor: 'y'
+                },
+                yaxis: { 
+                    title: 'Number of Soldiers',
+                    domain: [0.55, 1],
+                    anchor: 'x'
+                },
+                xaxis2: { 
+                    title: 'Date',
+                    domain: [0, 1],
+                    anchor: 'y2'
+                },
+                yaxis2: { 
+                    title: 'Temperature (°C)',
+                    domain: [0, 0.45],
+                    anchor: 'x2'
+                },
+                annotations: [
+                    {
+                        text: 'Losses by Group',
+                        font: { size: 16 },
+                        showarrow: false,
+                        x: 0.5,
+                        xref: 'paper',
+                        y: 1.0,
+                        yref: 'paper',
+                        xanchor: 'center',
+                        yanchor: 'bottom'
+                    },
+                    {
+                        text: 'Temperature by Date',
+                        font: { size: 16 },
+                        showarrow: false,
+                        x: 0.5,
+                        xref: 'paper',
+                        y: 0.45,
+                        yref: 'paper',
+                        xanchor: 'center',
+                        yanchor: 'bottom'
+                    }
+                ]
             };
 
-            Plotly.newPlot('dashboard', [trace1, trace2, trace3], layout);
+            Plotly.newPlot('dashboard', allTraces, layout);
         }
 
         // Temperature Analysis
