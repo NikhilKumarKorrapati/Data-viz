@@ -2,163 +2,149 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nikhil Kumar Korrapati | Analytics Portfolio</title>
+    <title>Nikhil Kumar Korrapati | Data Design Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header class="site-header" id="top">
+    <header class="header" id="top">
         <nav class="nav">
-            <a class="nav__brand" href="#top">NK Analytics</a>
+            <a class="nav__brand" href="#top">Nikhil Korrapati</a>
             <button class="nav__toggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="nav__bar"></span>
-                <span class="nav__bar"></span>
-                <span class="nav__bar"></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             <ul class="nav__links">
+                <li><a href="#work">Assignments</a></li>
+                <li><a href="#visual-stories">Visual Stories</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#insights">Dashboards</a></li>
-                <li><a href="#assignments">Assignments</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+
         <section class="hero">
             <div class="hero__copy">
-                <p class="eyebrow">Analytics Storyteller</p>
-                <h1>From pipelines to boardroom narratives.</h1>
-                <p class="hero__lead">I am Nikhil Kumar Korrapati — building modern data stacks, leading analysis, and crafting visuals that move decisions forward.</p>
+                <p class="hero__eyebrow">Analytics • Storytelling • Product Thinking</p>
+                <h1>Turning complex datasets into narratives stakeholders can act on.</h1>
+                <p class="hero__lead">From Snowflake pipelines to executive-ready dashboards, this portfolio showcases the assignments that anchor my analytics practice — each with working visuals and direct access to original artifacts.</p>
                 <div class="hero__actions">
-                    <a class="btn btn--primary" href="#projects">See the work</a>
-                    <a class="btn btn--ghost" href="README.md" target="_blank" rel="noopener">Portfolio notes</a>
+                    <a class="btn btn--primary" href="#work">Explore assignments</a>
+                    <a class="btn btn--ghost" href="README.md" target="_blank" rel="noopener">Read the case notes</a>
                 </div>
             </div>
             <div class="hero__viz">
-                <canvas id="heroChart" aria-label="Skill radar showing focus areas" role="img"></canvas>
+                <canvas id="skillChart" aria-label="Skill profile radar" role="img"></canvas>
             </div>
         </section>
     </header>
 
     <main>
-        <section class="section" id="about">
+        <section class="section section--work" id="work">
             <div class="section__heading">
-                <h2>About Me</h2>
-                <p>I am a data engineer by trade and a business analytics leader in the making. Snowflake, Azure Data Factory, and Apache Airflow power my pipelines; a part-time Master’s in Business Analytics and AI is sharpening the storytelling that follows.</p>
+                <h2>Assignment Portfolio</h2>
+                <p>Each deliverable links to the full artifact so hiring managers and peers can dig into the detail.</p>
+            </div>
+
+            <div class="work-grid">
+                <article class="work-card">
+                    <p class="work-card__tag">Assignment 1</p>
+                    <h3>Retail Analytics Storyboard</h3>
+                    <p class="work-card__summary">A pre-dashboard storyboard that aligns merchandising KPIs, risk flags, and stakeholder questions before development begins.</p>
+                    <ul class="work-card__bullets">
+                        <li>Experience flow for leadership reviews</li>
+                        <li>Annotated wireframes & data prompts</li>
+                        <li>Accessible PDF for async feedback</li>
+                    </ul>
+                    <a class="work-card__link" href="Assignments/Assignment-1(storyboard).pdf" target="_blank" rel="noopener">View Assignment&nbsp;1 PDF</a>
+                </article>
+
+                <article class="work-card">
+                    <p class="work-card__tag">Assignment 2</p>
+                    <h3>Minard Campaign Analysis</h3>
+                    <p class="work-card__summary">Reimagining Charles Minard’s 1869 map through interactive notebooks, spatial analysis, dashboards, and statistical storytelling.</p>
+                    <ul class="work-card__bullets">
+                        <li>Folium geographic explorer with contextual popups</li>
+                        <li>Plotly dashboards for losses, temperature, survival</li>
+                        <li>3D spatial rendering of attrition patterns</li>
+                    </ul>
+                    <div class="work-card__links">
+                        <a href="Assignments/Minard/Minard.ipynb" target="_blank" rel="noopener">Open Assignment&nbsp;2 notebook</a>
+                        <a href="#visual-stories">See interactive charts</a>
+                    </div>
+                </article>
+
+                <article class="work-card">
+                    <p class="work-card__tag">Assignment 3</p>
+                    <h3>Dashboard Critique & Redesign</h3>
+                    <p class="work-card__summary">An annotated teardown focused on accessibility, hierarchy, and narrative clarity — with actionable redesign recommendations.</p>
+                    <ul class="work-card__bullets">
+                        <li>Fitts’s Law & color contrast assessment</li>
+                        <li>Information hierarchy checklist</li>
+                        <li>Next-step redesign suggestions</li>
+                    </ul>
+                    <a class="work-card__link" href="Assignments/annotated-Assignment-3.pdf" target="_blank" rel="noopener">View Assignment&nbsp;3 PDF</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section--visuals" id="visual-stories">
+            <div class="section__heading">
+                <h2>Visual Stories</h2>
+                <p>Interactive highlights derived from the Minard dataset. Every chart below runs locally on GitHub Pages without external services.</p>
+            </div>
+
+            <div class="visual-grid">
+                <article class="visual-card">
+                    <header>
+                        <h3>Attrition vs. Climate</h3>
+                        <p>Troop strength (thousands) and retreat temperatures from the original CSVs.</p>
+                    </header>
+                    <canvas id="minardChart" height="280"></canvas>
+                </article>
+
+                <article class="visual-card">
+                    <header>
+                        <h3>Temperature Timeline</h3>
+                        <p>Daily temperature samples captured by the Grande Armée during the retreat.</p>
+                    </header>
+                    <canvas id="temperatureChart" height="280"></canvas>
+                </article>
+
+                <article class="visual-card">
+                    <header>
+                        <h3>Group Survival Rates</h3>
+                        <p>Starting vs. ending strength for all three army groups, including survival percentage.</p>
+                    </header>
+                    <canvas id="survivalChart" height="280"></canvas>
+                </article>
+            </div>
+        </section>
+
+        <section class="section section--about" id="about">
+            <div class="section__heading">
+                <h2>How I Work</h2>
+                <p>My analytics process is rooted in human-centered discovery, design, and enablement — the same framework applied to each assignment.</p>
             </div>
             <div class="about-grid">
-                <div class="about-card">
-                    <h3>What Drives Me</h3>
-                    <p>Each project starts with an executive question and ends with a narrative asset: dashboards that invite action, notebooks that explain the path, and documentation that equips teams to iterate.</p>
-                </div>
-                <div class="about-card">
-                    <h3>How I Work</h3>
-                    <p>Blend human-centered research, prototyping, and analytics best practices. Discover, design, develop, and deliver — aligning stakeholders at every milestone.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section section--projects" id="projects">
-            <div class="section__heading">
-                <h2>Spotlight Visualizations</h2>
-                <p>A mix of assignments and exploratory work that reflect the curated journey documented in the repository README.</p>
-            </div>
-            <div class="projects-grid" id="projectGrid" aria-live="polite"></div>
-        </section>
-
-        <section class="section section--insights" id="insights">
-            <div class="section__heading">
-                <h2>Analytics Snapshots</h2>
-                <p>Charts built from portfolio assets to highlight how insights flow from raw data to narrative-ready views.</p>
-            </div>
-            <div class="insights-grid">
-                <article class="insight-card">
-                    <header>
-                        <h3>Minard Attrition Story</h3>
-                        <p>Troop strength and temperature aligned using the exact CSVs from the Minard notebook.</p>
-                    </header>
-                    <canvas id="minardChart" height="220"></canvas>
+                <article class="about-card">
+                    <h3>Discover</h3>
+                    <p>Start with stakeholder language. Clarify success metrics, constraints, and how the insight will be consumed.</p>
                 </article>
-                <article class="insight-card">
-                    <header>
-                        <h3>Pipeline → Insight Coverage</h3>
-                        <p>Mapping time investment across my core practice areas from the README toolkit.</p>
-                    </header>
-                    <canvas id="coverageChart" height="220"></canvas>
+                <article class="about-card">
+                    <h3>Design</h3>
+                    <p>Prototype data stories with storyboards, low-fi dashboards, and narrative outlines that align expectations.</p>
                 </article>
-                <article class="insight-card">
-                    <header>
-                        <h3>Story Formats in Focus</h3>
-                        <p>Relative emphasis on the narrative formats I love to build.</p>
-                    </header>
-                    <canvas id="formatsChart" height="220"></canvas>
+                <article class="about-card">
+                    <h3>Develop</h3>
+                    <p>Build reliable data pipelines and analytical layers with Python, SQL, and Plotly/Altair for reproducibility.</p>
                 </article>
-            </div>
-        </section>
-
-        <section class="section section--stories">
-            <div class="section__heading">
-                <h2>Visual Storylines</h2>
-                <p>Handed off as dashboards, scrollytelling pieces, or scenario comparisons — depending on stakeholder needs.</p>
-            </div>
-            <ul class="storyline-list">
-                <li><strong>Decision-ready dashboards</strong> blending trend cards, anomaly callouts, and what-if toggles for leadership forums.</li>
-                <li><strong>Narrative scrollytelling</strong> that walks readers from context to insight to action on a single page.</li>
-                <li><strong>Comparative visuals</strong> that unpack how policy, process, or product changes ripple through customer behavior.</li>
-            </ul>
-        </section>
-
-        <section class="section section--testimonials">
-            <div class="section__heading">
-                <h2>Toolbox</h2>
-                <p>Pipelines, analytics, and enablement disciplines that anchor the portfolio.</p>
-            </div>
-            <div class="highlight-grid">
-                <div class="highlight-card">
-                    <h3>Pipelines & Platforms</h3>
-                    <p>Snowflake, Azure Data Factory, Apache Airflow, dbt (exploratory).</p>
-                </div>
-                <div class="highlight-card">
-                    <h3>Analytics & Visualization</h3>
-                    <p>Python, Pandas, Altair, Plotly, Power BI, with an emphasis on reproducibility.</p>
-                </div>
-                <div class="highlight-card">
-                    <h3>Enablement & Collaboration</h3>
-                    <p>GitHub-first documentation, Azure DevOps delivery, and stakeholder workshops.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section section--assignments" id="assignments">
-            <div class="section__heading">
-                <h2>Assignments & Case Files</h2>
-                <p>Original coursework artifacts referenced throughout the README — now one click away.</p>
-            </div>
-            <div class="assignments-grid">
-                <article class="assignment-card">
-                    <h3>Minard Campaign Notebook</h3>
-                    <p>Step-by-step reconstruction of the 1812 campaign visualization with annotated insights.</p>
-                    <div class="assignment-links">
-                        <a href="Assignments/Minard/Minard.ipynb" target="_blank" rel="noopener">Open notebook</a>
-                        <a href="Assignments/Minard/data/minard-troops.csv" target="_blank" rel="noopener">View data</a>
-                    </div>
-                </article>
-                <article class="assignment-card">
-                    <h3>Retail Analytics Storyboard</h3>
-                    <p>A storyboard that aligns merchandising KPIs, supply bottlenecks, and scenario plans before dashboard build.</p>
-                    <div class="assignment-links">
-                        <a href="Assignments/Assignment-1(storyboard).pdf" target="_blank" rel="noopener">Download PDF</a>
-                    </div>
-                </article>
-                <article class="assignment-card">
-                    <h3>Dashboard Critique Annotations</h3>
-                    <p>Deep dive into hierarchy, accessibility, and communication clarity for an analytics dashboard.</p>
-                    <div class="assignment-links">
-                        <a href="Assignments/annotated-Assignment-3.pdf" target="_blank" rel="noopener">Download PDF</a>
-                    </div>
+                <article class="about-card">
+                    <h3>Deliver</h3>
+                    <p>Ship actionable artifacts, document assumptions, and coach teams on iterating insights into decisions.</p>
                 </article>
             </div>
         </section>
@@ -166,27 +152,27 @@
         <section class="section section--contact" id="contact">
             <div class="section__heading">
                 <h2>Let’s Collaborate</h2>
-                <p>Open to analytics, visualization, and product experimentation engagements. Reach out and let’s build clarity together.</p>
+                <p>Open to analytics leadership, visualization consulting, and experimentation strategy work.</p>
             </div>
             <div class="contact-card">
                 <div>
-                    <p>Email</p>
+                    <span class="contact-card__label">Email</span>
                     <a href="mailto:korrapatinikhil06@gmail.com">korrapatinikhil06@gmail.com</a>
                 </div>
                 <div>
-                    <p>LinkedIn</p>
+                    <span class="contact-card__label">LinkedIn</span>
                     <a href="https://www.linkedin.com/in/korrapatinikhil" target="_blank" rel="noopener">linkedin.com/in/korrapatinikhil</a>
                 </div>
                 <div>
-                    <p>GitHub</p>
+                    <span class="contact-card__label">GitHub</span>
                     <a href="https://github.com/NikhilKumarKorrapati" target="_blank" rel="noopener">github.com/NikhilKumarKorrapati</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <p>© <span id="currentYear"></span> Nikhil Kumar Korrapati. Built with data storytelling in mind.</p>
+    <footer class="footer">
+        <p>© <span id="currentYear"></span> Nikhil Kumar Korrapati. Crafted for GitHub Pages.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

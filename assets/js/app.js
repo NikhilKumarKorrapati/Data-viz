@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const navToggle = document.querySelector('.nav__toggle');
     const navLinks = document.querySelector('.nav__links');
     const yearPlaceholder = document.getElementById('currentYear');
-    const projectGrid = document.getElementById('projectGrid');
 
     if (yearPlaceholder) {
         yearPlaceholder.textContent = new Date().getFullYear();
@@ -16,153 +15,64 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    const projects = [
-        {
-            title: 'Minard Campaign Narrative',
-            description: 'Reimagined the 1812 expedition using Python, Pandas, and Altair. The notebook layers troop attrition, longitude/latitude paths, and temperature annotations.',
-            tags: ['Storytelling', 'Jupyter', 'Altair'],
-            media: 'Assignments/Minard/Minard-1.png',
-            links: [
-                { label: 'View notebook', url: 'Assignments/Minard/Minard.ipynb' },
-                { label: 'See dataset', url: 'Assignments/Minard/data/minard-troops.csv' }
-            ]
-        },
-        {
-            title: 'Retail Analytics Storyboard',
-            description: 'Storyboard aligning merchandising KPIs, supply risk, and scenario branches before dashboard build — a pre-read for business stakeholders.',
-            tags: ['Storyboard', 'Experience Design', 'Planning'],
-            media: 'Assignments/Assignment-1(storyboard).pdf',
-            links: [
-                { label: 'Download storyboard', url: 'Assignments/Assignment-1(storyboard).pdf' }
-            ]
-        },
-        {
-            title: 'Dashboard Critique Annotations',
-            description: 'Annotated critique focused on accessibility, hierarchy, and communication clarity. Highlights actionable layout and color recommendations.',
-            tags: ['Dashboard Design', 'Accessibility', 'Critique'],
-            media: 'Assignments/annotated-Assignment-3.pdf',
-            links: [
-                { label: 'Read annotations', url: 'Assignments/annotated-Assignment-3.pdf' }
-            ]
-        },
-        {
-            title: 'Customer Growth Diagnostics',
-            description: 'Cohort analysis and experimentation backlog tracker connecting churn prediction, activation scoring, and growth hypotheses.',
-            tags: ['Cohort Analysis', 'Experimentation', 'Product Analytics'],
-            media: null,
-            links: [
-                { label: 'Explore charts', url: '#insights' },
-                { label: 'Request walkthrough', url: '#contact' }
-            ]
-        }
-    ];
+    renderSkillChart();
 
-    if (projectGrid) {
-        projects.forEach(project => {
-            const card = document.createElement('article');
-            card.className = 'project-card';
+    try {
+        const [troops, cities, temperature] = await Promise.all([
+            fetchCSV('Assignments/Minard/data/minard-troops.csv'),
+            fetchCSV('Assignments/Minard/data/minard-cities.csv'),
+            fetchCSV('Assignments/Minard/data/minard-temp.csv')
+        ]);
 
-            if (project.media) {
-                const mediaWrap = document.createElement('div');
-                mediaWrap.className = 'project-card__media';
-
-                if (project.media.endsWith('.pdf')) {
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'project-card__placeholder';
-                    placeholder.textContent = 'PDF Preview';
-                    mediaWrap.appendChild(placeholder);
-                } else {
-                    const img = document.createElement('img');
-                    img.src = project.media;
-                    img.alt = `${project.title} visual preview`;
-                    mediaWrap.appendChild(img);
-                }
-
-                card.appendChild(mediaWrap);
-            }
-
-            const title = document.createElement('h3');
-            title.textContent = project.title;
-            card.appendChild(title);
-
-            const description = document.createElement('p');
-            description.textContent = project.description;
-            card.appendChild(description);
-
-            if (project.tags?.length) {
-                const tagWrap = document.createElement('div');
-                tagWrap.className = 'project-card__tags';
-                project.tags.forEach(tag => {
-                    const badge = document.createElement('span');
-                    badge.className = 'tag';
-                    badge.textContent = tag;
-                    tagWrap.appendChild(badge);
-                });
-                card.appendChild(tagWrap);
-            }
-
-            if (project.links?.length) {
-                const linkWrap = document.createElement('div');
-                linkWrap.className = 'project-card__links';
-                project.links.forEach(link => {
-                    const anchor = document.createElement('a');
-                    anchor.href = link.url;
-                    anchor.textContent = link.label;
-                    if (link.url.startsWith('http') || link.url.endsWith('.pdf') || link.url.endsWith('.ipynb')) {
-                        anchor.target = '_blank';
-                        anchor.rel = 'noopener';
-                    }
-                    linkWrap.appendChild(anchor);
-                });
-                card.appendChild(linkWrap);
-            }
-
-            projectGrid.appendChild(card);
-        });
+        renderMinardChart(troops, cities, temperature);
+        renderTemperatureTimeline(temperature);
+        renderSurvivalChart(troops);
+    } catch (error) {
+        console.error('Failed to load Minard data', error);
     }
-
-    const heroCanvas = document.getElementById('heroChart');
-    if (heroCanvas) {
-        new Chart(heroCanvas, {
-            type: 'radar',
-            data: {
-                labels: ['Data Engineering', 'Visualization Craft', 'Experimentation', 'Stakeholder Enablement', 'Storytelling'],
-                datasets: [
-                    {
-                        label: 'Skill Focus',
-                        data: [90, 96, 82, 88, 94],
-                        backgroundColor: 'rgba(56, 189, 248, 0.35)',
-                        borderColor: '#38bdf8',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#38bdf8',
-                        pointBorderColor: '#0f172a',
-                        pointRadius: 4
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(148, 163, 184, 0.12)' },
-                        angleLines: { color: 'rgba(148, 163, 184, 0.12)' },
-                        pointLabels: { color: '#cbd5f5', font: { size: 12 } },
-                        ticks: { display: false, maxTicksLimit: 4 }
-                    }
-                },
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
-    }
-
-    await renderMinardChart();
-    renderCoverageChart();
-    renderFormatsChart();
 });
+
+function renderSkillChart() {
+    const canvas = document.getElementById('skillChart');
+    if (!canvas) {
+        return;
+    }
+
+    new Chart(canvas, {
+        type: 'radar',
+        data: {
+            labels: ['Data Engineering', 'Visualization Craft', 'Experimentation', 'Stakeholder Enablement', 'Storytelling'],
+            datasets: [
+                {
+                    label: 'Skill Focus',
+                    data: [90, 95, 82, 88, 93],
+                    backgroundColor: 'rgba(96, 165, 250, 0.35)',
+                    borderColor: '#60a5fa',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#60a5fa',
+                    pointBorderColor: '#0b1220',
+                    pointRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(148, 163, 184, 0.14)' },
+                    angleLines: { color: 'rgba(148, 163, 184, 0.14)' },
+                    pointLabels: { color: '#cbd5f5', font: { size: 12 } },
+                    ticks: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+}
 
 function parseCSV(text) {
     const rows = text.trim().split(/\r?\n/).filter(Boolean);
@@ -191,115 +101,110 @@ async function fetchCSV(path) {
     return parseCSV(text);
 }
 
-async function renderMinardChart() {
-    const minardCanvas = document.getElementById('minardChart');
-    if (!minardCanvas) {
+function renderMinardChart(troops, cities, temperature) {
+    const canvas = document.getElementById('minardChart');
+    if (!canvas) {
         return;
     }
 
-    try {
-        const [pathData, temperatureData] = await Promise.all([
-            fetchCSV('Assignments/Minard/data/minard-cities.csv'),
-            fetchCSV('Assignments/Minard/data/minard-temp.csv')
-        ]);
+    const group1Advance = troops.filter(item => item.group === '1' && item.direction === 'Advance');
+    const pathLabels = group1Advance.map(point => {
+        const match = cities.find(city => city.long === point.long && city.lat === point.lat);
+        return match && match.city ? match.city : point.direction;
+    });
 
-        const primaryPath = pathData.filter(point => point.group === '1');
-        const labels = primaryPath.map((point, index) => point.city || `${point.direction} ${index + 1}`);
-        const survivors = primaryPath.map(point => Number(point.survivors) / 1000);
+    const strength = group1Advance.map(point => Number(point.survivors) / 1000);
 
-        const temps = primaryPath.map(point => {
-            const pointLong = Number(point.long);
-            const entry = temperatureData.find(temp => Math.abs(Number(temp.long) - pointLong) < 0.35);
-            return entry ? Number(entry.temp) : null;
-        });
+    const temperatureByLong = temperature.reduce((acc, entry) => {
+        acc[Number(entry.long)] = Number(entry.temp);
+        return acc;
+    }, {});
 
-        new Chart(minardCanvas, {
-            type: 'line',
-            data: {
-                labels,
-                datasets: [
-                    {
-                        label: 'Troop Strength (thousands)',
-                        data: survivors,
-                        borderColor: '#f97316',
-                        backgroundColor: 'rgba(249, 115, 22, 0.15)',
-                        borderWidth: 2.2,
-                        tension: 0.3,
-                        yAxisID: 'y'
-                    },
-                    {
-                        label: 'Temperature (°C)',
-                        data: temps,
-                        borderColor: '#38bdf8',
-                        backgroundColor: 'rgba(56, 189, 248, 0.2)',
-                        borderDash: [6, 6],
-                        borderWidth: 2,
-                        tension: 0.3,
-                        yAxisID: 'y1'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    legend: { labels: { color: '#cbd5f5' } },
-                    tooltip: {
-                        callbacks: {
-                            title: items => items[0]?.label ?? '',
-                            label: context => `${context.dataset.label}: ${context.parsed.y}`
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#94a3b8' },
-                        grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                    },
-                    y: {
-                        position: 'left',
-                        ticks: {
-                            color: '#fda769',
-                            callback: value => `${value}`
-                        },
-                        grid: { color: 'rgba(148, 163, 184, 0.08)' }
-                    },
-                    y1: {
-                        position: 'right',
-                        ticks: {
-                            color: '#38bdf8',
-                            callback: value => `${value}°`
-                        },
-                        grid: { drawOnChartArea: false }
-                    }
-                }
-            }
-        });
-    } catch (error) {
-        console.error(error);
-    }
-}
+    const tempSeries = group1Advance.map(point => {
+        const key = findNearest(Object.keys(temperatureByLong).map(Number), Number(point.long));
+        return key !== null ? temperatureByLong[key] : null;
+    });
 
-function renderCoverageChart() {
-    const coverageCanvas = document.getElementById('coverageChart');
-    if (!coverageCanvas) {
-        return;
-    }
-
-    new Chart(coverageCanvas, {
-        type: 'bar',
+    new Chart(canvas, {
+        type: 'line',
         data: {
-            labels: ['Pipelines & Platforms', 'Analytics & Visualization', 'Enablement & Collaboration'],
+            labels: pathLabels,
             datasets: [
                 {
-                    label: 'Time Allocation (%)',
-                    data: [35, 45, 20],
-                    backgroundColor: [
-                        'rgba(14, 165, 233, 0.65)',
-                        'rgba(59, 130, 246, 0.7)',
-                        'rgba(165, 180, 252, 0.7)'
-                    ],
+                    label: 'Troop strength (thousands)',
+                    data: strength,
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.18)',
+                    borderWidth: 2,
+                    tension: 0.25,
+                    yAxisID: 'y'
+                },
+                {
+                    label: 'Temperature (°C)',
+                    data: tempSeries,
+                    borderColor: '#60a5fa',
+                    backgroundColor: 'rgba(96, 165, 250, 0.2)',
+                    borderDash: [6, 6],
+                    borderWidth: 2,
+                    tension: 0.25,
+                    yAxisID: 'y1'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: {
+                    labels: { color: '#cbd5f5' }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: items => items[0]?.label ?? '',
+                        label: context => `${context.dataset.label}: ${context.parsed.y}`
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#9ca9c9' },
+                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
+                },
+                y: {
+                    position: 'left',
+                    ticks: { color: '#fbbf24' },
+                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
+                },
+                y1: {
+                    position: 'right',
+                    ticks: { color: '#60a5fa', callback: value => `${value}°` },
+                    grid: { drawOnChartArea: false }
+                }
+            }
+        }
+    });
+}
+
+function renderTemperatureTimeline(temperature) {
+    const canvas = document.getElementById('temperatureChart');
+    if (!canvas) {
+        return;
+    }
+
+    const filtered = temperature.filter(item => item.temp !== '');
+    const labels = filtered.map(entry => entry.date || `Lon ${entry.long}`);
+    const temps = filtered.map(entry => Number(entry.temp));
+
+    new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [
+                {
+                    label: 'Temperature (°C)',
+                    data: temps,
+                    backgroundColor: temps.map(value => value <= -20 ? 'rgba(239, 68, 68, 0.7)' : 'rgba(59, 130, 246, 0.7)'),
                     borderRadius: 10,
                     borderSkipped: false
                 }
@@ -309,24 +214,15 @@ function renderCoverageChart() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { labels: { color: '#cbd5f5' } },
-                tooltip: {
-                    callbacks: {
-                        label: context => `${context.parsed.y}% focus`
-                    }
-                }
+                legend: { display: false }
             },
             scales: {
                 x: {
-                    ticks: { color: '#94a3b8' },
+                    ticks: { color: '#9ca9c9' },
                     grid: { display: false }
                 },
                 y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: '#94a3b8',
-                        callback: value => `${value}%`
-                    },
+                    ticks: { color: '#9ca9c9', callback: value => `${value}°` },
                     grid: { color: 'rgba(148, 163, 184, 0.08)' }
                 }
             }
@@ -334,27 +230,50 @@ function renderCoverageChart() {
     });
 }
 
-function renderFormatsChart() {
-    const formatsCanvas = document.getElementById('formatsChart');
-    if (!formatsCanvas) {
+function renderSurvivalChart(troops) {
+    const canvas = document.getElementById('survivalChart');
+    if (!canvas) {
         return;
     }
 
-    new Chart(formatsCanvas, {
-        type: 'doughnut',
+    const groups = Array.from(new Set(troops.map(item => item.group))).sort();
+
+    const stats = groups.map(group => {
+        const groupData = troops.filter(item => item.group === group);
+        const advance = groupData.filter(item => item.direction === 'Advance');
+        const retreat = groupData.filter(item => item.direction === 'Retreat');
+
+        const start = advance.length ? Math.max(...advance.map(item => Number(item.survivors))) : 0;
+        const end = retreat.length ? Math.min(...retreat.map(item => Number(item.survivors))) : start;
+
+        const survivalRate = start > 0 ? Math.round((end / start) * 100) : 0;
+
+        return {
+            group: `Group ${group}`,
+            start,
+            end,
+            survivalRate
+        };
+    });
+
+    new Chart(canvas, {
+        type: 'bar',
         data: {
-            labels: ['Decision-ready dashboards', 'Narrative scrollytelling', 'Comparative visuals'],
+            labels: stats.map(item => item.group),
             datasets: [
                 {
-                    data: [40, 32, 28],
-                    backgroundColor: [
-                        'rgba(56, 189, 248, 0.85)',
-                        'rgba(14, 165, 233, 0.85)',
-                        'rgba(2, 132, 199, 0.85)'
-                    ],
-                    borderColor: '#0f172a',
-                    borderWidth: 3,
-                    hoverOffset: 10
+                    label: 'Campaign start',
+                    data: stats.map(item => item.start),
+                    backgroundColor: 'rgba(125, 211, 252, 0.65)',
+                    borderRadius: 12,
+                    borderSkipped: false
+                },
+                {
+                    label: 'Campaign end',
+                    data: stats.map(item => item.end),
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    borderRadius: 12,
+                    borderSkipped: false
                 }
             ]
         },
@@ -363,19 +282,37 @@ function renderFormatsChart() {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'bottom',
-                    labels: { color: '#cbd5f5', padding: 16 }
+                    labels: { color: '#cbd5f5' }
                 },
                 tooltip: {
                     callbacks: {
-                        label: context => {
-                            const total = context.dataset.data.reduce((sum, value) => sum + value, 0);
-                            const share = ((context.parsed / total) * 100).toFixed(1);
-                            return `${context.label}: ${context.parsed}% focus • ${share}% share`;
+                        afterBody: items => {
+                            const index = items[0].dataIndex;
+                            return `Survival rate: ${stats[index].survivalRate}%`;
                         }
                     }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#9ca9c9' },
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: {
+                        color: '#9ca9c9',
+                        callback: value => `${value.toLocaleString()}`
+                    },
+                    grid: { color: 'rgba(148, 163, 184, 0.08)' }
                 }
             }
         }
     });
+}
+
+function findNearest(values, target) {
+    if (!values.length) {
+        return null;
+    }
+    return values.reduce((prev, curr) => Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
 }
