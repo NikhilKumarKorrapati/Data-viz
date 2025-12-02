@@ -103,247 +103,168 @@
         </div>
     </section>
 
-    <!-- Featured Work Section -->
-    <section id="work" class="featured-work">
+    <!-- Portfolio Section -->
+    <section id="work" class="portfolio">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Portfolio</span>
-                <h2 class="section-title">Featured Projects</h2>
+                <span class="section-label">My Portfolio</span>
+                <h2 class="section-title">Data Visualization & Engineering</h2>
+                <p class="lead">A collection of my work in data storytelling, engineering pipelines, and analytics.</p>
             </div>
 
-            <!-- Featured Project 1: Minard -->
-            <div class="featured-project">
-                <div class="featured-project-image">
-                    <img src="https://raw.githubusercontent.com/NikhilKumarKorrapati/Data-viz/main/Assignments/Minard/minard-preview.png" alt="Minard's March" onerror="this.src='https://via.placeholder.com/1200x800/667eea/ffffff?text=Minard+Napoleon+March+Visualization'">
-                    <div class="project-number">01</div>
-                </div>
-                <div class="featured-project-content">
-                    <div class="project-category">Interactive Visualization • Geospatial Analysis</div>
-                    <h3>Minard's Napoleon March Reimagined</h3>
-                    <p>A modern interpretation of Charles Minard's iconic 1861 flow map, visualizing Napoleon's catastrophic 1812 Russian campaign. This project layers troop strength, temperature data, and geography into interactive 3D visualizations using Python, Folium, and Plotly.</p>
-                    <div class="project-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Tools</span>
-                            <span class="detail-value">Python, Folium, Plotly, Pandas</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Type</span>
-                            <span class="detail-value">Academic Research</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Year</span>
-                            <span class="detail-value">2024</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="projects/minard-viewer.html" class="btn btn-primary">View Project</a>
-                        <a href="Assignments/Minard/Minard.ipynb" class="btn btn-outline" target="_blank">View Notebook</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured Project 2: Financial Lifestyle -->
-            <div class="featured-project reverse">
-                <div class="featured-project-image">
-                    <img src="https://via.placeholder.com/1200x800/f093fb/ffffff?text=Financial+Lifestyle+Analysis" alt="Financial Lifestyle">
-                    <div class="project-number">02</div>
-                </div>
-                <div class="featured-project-content">
-                    <div class="project-category">Data Storytelling • Financial Analysis</div>
-                    <h3>Financial Choices & Lifestyle Balance</h3>
-                    <p>An emotionally resonant data story exploring how financial habits shape our lives. This narrative visualization contrasts two individuals' lifestyles to reveal that high income doesn't always equal success—examining affordability, burnout, social pressure, and the hidden costs of modern lifestyle choices.</p>
-                    <div class="project-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Tools</span>
-                            <span class="detail-value">Tableau, Adobe Illustrator</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Type</span>
-                            <span class="detail-value">Narrative Visualization</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Year</span>
-                            <span class="detail-value">2024</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="Assignments/Assignment-1.pdf" class="btn btn-primary" target="_blank">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured Project 3: Nutrition -->
-            <div class="featured-project">
-                <div class="featured-project-image">
-                    <img src="https://via.placeholder.com/1200x800/4facfe/ffffff?text=Nutrition+Infographic" alt="Nutrition Infographic">
-                    <div class="project-number">03</div>
-                </div>
-                <div class="featured-project-content">
-                    <div class="project-category">Infographic Design • Public Health</div>
-                    <h3>The Hidden Truth of Ultra-Processed Foods</h3>
-                    <p>An eye-opening infographic revealing the hidden dangers of ultra-processed foods in our modern diet. This visual investigation explores nutrition science, health impacts, and the prevalence of processed ingredients in everyday meals—designed to raise public awareness about food choices.</p>
-                    <div class="project-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Tools</span>
-                            <span class="detail-value">Adobe Illustrator, Figma</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Type</span>
-                            <span class="detail-value">Infographic</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Year</span>
-                            <span class="detail-value">2024</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="Assignments/Assignment-3.pdf" class="btn btn-primary" target="_blank">View Project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- All Projects Gallery -->
-    <section class="projects-gallery">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">All Work</span>
-                <h2 class="section-title">Complete Portfolio</h2>
-            </div>
-
-            <!-- Filter -->
+            <!-- Filter Buttons -->
             <div class="filter-tabs">
                 <button class="filter-tab active" data-filter="all">All Projects</button>
-                <button class="filter-tab" data-filter="interactive">Interactive</button>
-                <button class="filter-tab" data-filter="dashboard">Dashboards</button>
-                <button class="filter-tab" data-filter="storytelling">Storytelling</button>
-                <button class="filter-tab" data-filter="geospatial">Geospatial</button>
+                <button class="filter-tab" data-filter="visualization">Visualization</button>
+                <button class="filter-tab" data-filter="engineering">Engineering</button>
+                <button class="filter-tab" data-filter="ml">Machine Learning</button>
             </div>
 
             <!-- Projects Grid -->
-            <div class="gallery-grid">
-                <!-- Project Cards -->
-                <div class="gallery-card" data-category="interactive geospatial">
+            <div class="portfolio-grid">
+                
+                <!-- 1. Minard (User Project) -->
+                <div class="project-card" data-category="visualization">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/667eea/ffffff?text=Minard+March" alt="Minard Project">
+                        <img src="https://raw.githubusercontent.com/NikhilKumarKorrapati/Data-viz/main/Assignments/Minard/minard-preview.png" alt="Minard Visualization" onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80'">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="projects/minard-viewer.html" class="btn-icon" title="View Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="Assignments/Minard/Minard.ipynb" class="btn-icon" title="View Code"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>Minard's Napoleon March</h4>
-                        <p>Interactive geospatial visualization of historic military campaign</p>
-                        <div class="card-tags">
-                            <span>Python</span>
-                            <span>Folium</span>
-                            <span>Plotly</span>
-                        </div>
-                        <a href="projects/minard-viewer.html" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Python • Folium</div>
+                        <h3>Minard's Napoleon March</h3>
+                        <p>Interactive 3D recreation of the classic 1861 flow map tracking Napoleon's Russian campaign.</p>
                     </div>
                 </div>
 
-                <div class="gallery-card" data-category="storytelling">
+                <!-- 2. Financial Lifestyle (User Project) -->
+                <div class="project-card" data-category="visualization">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/f093fb/ffffff?text=Financial+Lifestyle" alt="Financial Analysis">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80" alt="Financial Analysis">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="Assignments/Assignment-1.pdf" class="btn-icon" title="View PDF"><i class="fas fa-file-pdf"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>Financial Lifestyle Balance</h4>
-                        <p>Data storytelling on financial habits and lifestyle choices</p>
-                        <div class="card-tags">
-                            <span>Tableau</span>
-                            <span>Storytelling</span>
-                        </div>
-                        <a href="Assignments/Assignment-1.pdf" class="card-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Tableau • Storytelling</div>
+                        <h3>Financial Lifestyle Balance</h3>
+                        <p>Narrative visualization contrasting income vs. lifestyle choices and their hidden costs.</p>
                     </div>
                 </div>
 
-                <div class="gallery-card" data-category="storytelling">
+                <!-- 3. Nutrition (User Project) -->
+                <div class="project-card" data-category="visualization">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/4facfe/ffffff?text=Nutrition+Study" alt="Nutrition Infographic">
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80" alt="Nutrition Infographic">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="Assignments/Assignment-3.pdf" class="btn-icon" title="View PDF"><i class="fas fa-file-pdf"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>Ultra-Processed Foods Study</h4>
-                        <p>Public health infographic on modern nutrition challenges</p>
-                        <div class="card-tags">
-                            <span>Infographic</span>
-                            <span>Design</span>
-                        </div>
-                        <a href="Assignments/Assignment-3.pdf" class="card-link" target="_blank">View Project <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Design • Infographic</div>
+                        <h3>Ultra-Processed Foods</h3>
+                        <p>Visual investigation into the health impacts of modern processed diets.</p>
                     </div>
                 </div>
 
-                <div class="gallery-card" data-category="dashboard interactive">
+                <!-- 4. Global Climate Tracker (New) -->
+                <div class="project-card" data-category="visualization ml">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/00f2fe/ffffff?text=Sales+Dashboard" alt="Sales Dashboard">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Climate Dashboard">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="#" class="btn-icon" title="View Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/NikhilKumarKorrapati" class="btn-icon" title="View Code"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>Executive Sales Dashboard</h4>
-                        <p>Real-time KPI tracking and predictive analytics</p>
-                        <div class="card-tags">
-                            <span>Tableau</span>
-                            <span>BI</span>
-                        </div>
-                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Plotly Dash • Python</div>
+                        <h3>Global Climate Tracker</h3>
+                        <p>Interactive dashboard visualizing temperature anomalies (1880-2024) with predictive forecasting.</p>
                     </div>
                 </div>
 
-                <div class="gallery-card" data-category="interactive dashboard">
+                <!-- 5. Spotify Analysis (New) -->
+                <div class="project-card" data-category="visualization">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/ffa400/ffffff?text=Customer+Segmentation" alt="Customer Segmentation">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Spotify Analysis">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="#" class="btn-icon" title="View Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/NikhilKumarKorrapati" class="btn-icon" title="View Code"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>Customer Segmentation Analysis</h4>
-                        <p>ML-powered clustering for behavioral insights</p>
-                        <div class="card-tags">
-                            <span>Python</span>
-                            <span>ML</span>
-                        </div>
-                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Tableau • Spotify API</div>
+                        <h3>Streaming Habits Analysis</h3>
+                        <p>Deep dive into personal music data, visualizing genre trends and seasonal listening patterns.</p>
                     </div>
                 </div>
 
-                <div class="gallery-card" data-category="interactive">
+                <!-- 6. E-commerce Churn (New) -->
+                <div class="project-card" data-category="ml engineering">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/a8e6cf/ffffff?text=Time+Series+Analysis" alt="Time Series">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80" alt="Churn Prediction">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="#" class="btn-icon" title="View Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/NikhilKumarKorrapati" class="btn-icon" title="View Code"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>Demand Forecasting Model</h4>
-                        <p>ARIMA and Prophet models for predictive analytics</p>
-                        <div class="card-tags">
-                            <span>R</span>
-                            <span>Forecasting</span>
-                        </div>
-                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Scikit-learn • Pandas</div>
+                        <h3>Customer Churn Prediction</h3>
+                        <p>Machine learning pipeline identifying at-risk customers with 85% accuracy to improve retention.</p>
                     </div>
                 </div>
 
-                <div class="gallery-card" data-category="interactive">
+                <!-- 7. Stock Sentiment (New) -->
+                <div class="project-card" data-category="engineering ml">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/ff6b6b/ffffff?text=Network+Analysis" alt="Network Analysis">
+                        <img src="https://images.unsplash.com/photo-1611974765270-ca1258634369?auto=format&fit=crop&w=800&q=80" alt="Stock Sentiment">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="#" class="btn-icon" title="View Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/NikhilKumarKorrapati" class="btn-icon" title="View Code"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>Social Network Visualization</h4>
-                        <p>D3.js force-directed graph with community detection</p>
-                        <div class="card-tags">
-                            <span>D3.js</span>
-                            <span>Network</span>
-                        </div>
-                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Kafka • Spark • D3.js</div>
+                        <h3>Real-time Market Sentiment</h3>
+                        <p>Streaming data pipeline analyzing social media sentiment for tech stocks in real-time.</p>
                     </div>
                 </div>
 
-                <div class="gallery-card" data-category="geospatial interactive">
+                <!-- 8. Supply Chain (New) -->
+                <div class="project-card" data-category="engineering">
                     <div class="card-image">
-                        <img src="https://via.placeholder.com/600x400/c7ceea/ffffff?text=COVID+Analysis" alt="COVID Analysis">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Supply Chain">
+                        <div class="card-overlay">
+                            <div class="card-actions">
+                                <a href="#" class="btn-icon" title="View Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/NikhilKumarKorrapati" class="btn-icon" title="View Code"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content">
-                        <h4>COVID-19 Impact Analysis</h4>
-                        <p>Geospatial tracking of pandemic spread patterns</p>
-                        <div class="card-tags">
-                            <span>GIS</span>
-                            <span>Choropleth</span>
-                        </div>
-                        <a href="#" class="card-link">Coming Soon <i class="fas fa-arrow-right"></i></a>
+                        <div class="card-meta">Snowflake • Airflow</div>
+                        <h3>Supply Chain ETL Pipeline</h3>
+                        <p>Automated data warehouse orchestration processing 1M+ daily logistics records.</p>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

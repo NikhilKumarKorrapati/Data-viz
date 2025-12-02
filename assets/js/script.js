@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // PROJECT FILTERING
     // ==========================================
     const filterTabs = document.querySelectorAll('.filter-tab');
-    const galleryCards = document.querySelectorAll('.gallery-card');
+    const galleryCards = document.querySelectorAll('.project-card');
     
     filterTabs.forEach(tab => {
         tab.addEventListener('click', function() {
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Observe elements for animation
     const animatedElements = document.querySelectorAll(
-        '.featured-project, .gallery-card, .skill-card, .stat-box, .highlight-item'
+        '.project-card, .skill-card, .stat-box, .highlight-item'
     );
     
     animatedElements.forEach(el => {
