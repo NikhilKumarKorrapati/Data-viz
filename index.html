@@ -3,405 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nikhil Kumar Korrapati - Analytics Storyteller and Data Visualization Portfolio">
-    <title>Nikhil Kumar Korrapati | Data Analytics Portfolio</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=2.0">
+    <meta name="description" content="Nikhil Kumar Korrapati - Data Visualization Portfolio">
+    <title>Nikhil Kumar Korrapati | Data Visualization Portfolio</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=3.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <header class="header">
         <div class="container">
-            <div class="nav-brand">NK Korrapati</div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="header-content">
+                <h1 class="site-title">Nikhil Kumar Korrapati</h1>
+                <nav class="main-nav">
+                    <a href="#about">About</a>
+                    <a href="#work">Work</a>
+                    <a href="#contact">Contact</a>
+                </nav>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <h1 class="hero-title">Nikhil Kumar Korrapati</h1>
-            <p class="hero-subtitle">Analytics Storyteller | Data Engineer | Visualization Specialist</p>
-            <p class="hero-description">Crafting data products and visual narratives that move organizations from questions to confident decisions</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
-            <div class="scroll-indicator">
-                <i class="fas fa-chevron-down"></i>
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Data Visualization Portfolio</h2>
+                <p class="hero-subtitle">Analytics Storyteller | Data Engineer | Visualization Specialist</p>
             </div>
         </div>
     </section>
 
+
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="lead">I am a data engineer by trade and a business analytics leader in the making.</p>
-                    <p>I build and orchestrate modern data stacks with <strong>Snowflake</strong>, <strong>Azure Data Factory</strong>, and <strong>Apache Airflow</strong>, and I am pursuing a part-time Master's in Business Analytics and AI to expand my impact from pipelines to boardroom insights.</p>
-                    <p>My portfolio captures the experiments, assignments, and narrative visualizations that trace this transition from technical implementation to strategic storytelling.</p>
-                    
-                    <h3>What I Love to Build</h3>
-                    <ul class="love-list">
-                        <li><i class="fas fa-chart-line"></i> Decision-ready dashboards with trend analysis and what-if scenarios</li>
-                        <li><i class="fas fa-book-open"></i> Narrative scrollytelling pieces from context to actionable insights</li>
-                        <li><i class="fas fa-layer-group"></i> Comparative visuals that reveal how changes ripple through behavior</li>
-                        <li><i class="fas fa-database"></i> Modern data pipelines that transform raw data into business value</li>
-                    </ul>
-                </div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <h3 class="stat-number">10+</h3>
-                        <p class="stat-label">Visualization Projects</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 class="stat-number">5+</h3>
-                        <p class="stat-label">Tools & Technologies</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 class="stat-number">100%</h3>
-                        <p class="stat-label">Passion for Data</p>
-                    </div>
-                </div>
+            <h2 class="section-title">About</h2>
+            <div class="about-text">
+                <p>I am a data engineer by trade and a business analytics leader in the making. I build and orchestrate modern data stacks with Snowflake, Azure Data Factory, and Apache Airflow.</p>
+                <p>I'm pursuing a part-time Master's in Business Analytics and AI to expand my impact from pipelines to boardroom insights. This portfolio captures the experiments, assignments, and narrative visualizations that trace this transition from technical implementation to strategic storytelling.</p>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="work" class="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">A curated collection of data visualizations and analytics projects</p>
+            <h2 class="section-title">Selected Work</h2>
             
-            <!-- Filter Buttons -->
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="interactive">Interactive</button>
-                <button class="filter-btn" data-filter="dashboard">Dashboards</button>
-                <button class="filter-btn" data-filter="academic">Academic</button>
-                <button class="filter-btn" data-filter="geospatial">Geospatial</button>
-            </div>
-
-            <!-- Projects Grid -->
             <div class="projects-grid">
-                <!-- Project 1: Minard's Napoleon March -->
-                <div class="project-card" data-category="interactive geospatial academic">
+                <!-- Project 1: Minard -->
+                <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80" alt="Napoleon's March Visualization">
-                        <div class="project-overlay">
-                            <a href="projects/minard-viewer.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
+                        <img src="https://raw.githubusercontent.com/NikhilKumarKorrapati/Data-viz/main/Assignments/Minard/minard-preview.png" alt="Minard's March Visualization" onerror="this.src='https://via.placeholder.com/800x600/f8f9fa/495057?text=Minard+March+Visualization'">
                     </div>
-                    <div class="project-content">
+                    <div class="project-info">
+                        <h3>Minard's Napoleon March Reimagined</h3>
+                        <p>Interactive geospatial visualization of Napoleon's 1812 Russian campaign using Python, Folium, and Plotly</p>
                         <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Folium</span>
-                            <span class="tag">Plotly</span>
-                            <span class="tag">Geospatial</span>
+                            <span>Python</span>
+                            <span>Folium</span>
+                            <span>Plotly</span>
+                            <span>Geospatial</span>
                         </div>
-                        <h3 class="project-title">Minard's Napoleon March Reimagined</h3>
-                        <p class="project-description">
-                            Reimagined the classic 1861 flow map with modern Python tooling, layering troop strength, temperature, and geography into interactive 3D visualizations. Features multiple perspectives including Folium maps, analytical dashboards, and environmental impact analysis.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-code"></i> Jupyter Notebook</span>
+                        <div class="project-links">
+                            <a href="projects/minard-viewer.html" class="btn-link">View Project →</a>
+                            <a href="Assignments/Minard/Minard.ipynb" class="btn-link" target="_blank">Notebook →</a>
                         </div>
-                        <a href="projects/minard-viewer.html" class="btn-view">View Project</a>
-                        <a href="Assignments/Minard/Minard.ipynb" class="btn-view" target="_blank" style="background: var(--dark-bg); margin-top: 0.5rem;">View Notebook</a>
                     </div>
                 </div>
 
-                <!-- Project 2: Assignment 1 - Financial Lifestyle & Storytelling -->
-                <div class="project-card" data-category="academic dashboard">
+                <!-- Project 2: Financial Lifestyle -->
+                <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80" alt="Financial Lifestyle Visualization">
-                        <div class="project-overlay">
-                            <a href="Assignments/Assignment-1.pdf" class="project-link" target="_blank">
-                                <i class="fas fa-file-pdf"></i>
-                            </a>
-                        </div>
+                        <img src="https://via.placeholder.com/800x600/f8f9fa/495057?text=Financial+Lifestyle+Analysis" alt="Financial Lifestyle Visualization">
                     </div>
-                    <div class="project-content">
+                    <div class="project-info">
+                        <h3>Financial Choices & Lifestyle Balance</h3>
+                        <p>Data storytelling exploring how financial habits shape our lives, contrasting lifestyle choices and hidden costs</p>
                         <div class="project-tags">
-                            <span class="tag">Storytelling</span>
-                            <span class="tag">Financial Analysis</span>
-                            <span class="tag">Lifestyle Balance</span>
+                            <span>Storytelling</span>
+                            <span>Financial Analysis</span>
+                            <span>Lifestyle</span>
                         </div>
-                        <h3 class="project-title">Financial Choices & Lifestyle Balance</h3>
-                        <p class="project-description">
-                            An emotionally resonant data story exploring how financial habits shape our lives. Contrasts two individuals' lifestyles to reveal that high income doesn't always equal success—examining affordability, burnout, social pressure, and the hidden costs of lifestyle choices in today's economy.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-file"></i> Visual Storytelling</span>
+                        <div class="project-links">
+                            <a href="Assignments/Assignment-1.pdf" class="btn-link" target="_blank">View PDF →</a>
                         </div>
-                        <a href="Assignments/Assignment-1.pdf" class="btn-view" target="_blank">View PDF</a>
-                        <a href="Assignments/Assignment-1.pdf" class="btn-view" target="_blank" download style="background: var(--dark-bg); margin-top: 0.5rem;">Download PDF</a>
                     </div>
                 </div>
 
-                <!-- Project 3: Assignment 3 - Nutrition Infographic -->
-                <div class="project-card" data-category="academic interactive">
+                <!-- Project 3: Nutrition Infographic -->
+                <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=600&fit=crop&q=80" alt="Nutrition Infographic">
-                        <div class="project-overlay">
-                            <a href="Assignments/Assignment-3.pdf" class="project-link" target="_blank">
-                                <i class="fas fa-file-pdf"></i>
-                            </a>
-                        </div>
+                        <img src="https://via.placeholder.com/800x600/f8f9fa/495057?text=Nutrition+Infographic" alt="Nutrition Infographic">
                     </div>
-                    <div class="project-content">
+                    <div class="project-info">
+                        <h3>The Hidden Truth of Ultra-Processed Foods</h3>
+                        <p>Infographic revealing the hidden dangers of ultra-processed foods and their impact on modern health</p>
                         <div class="project-tags">
-                            <span class="tag">Infographic</span>
-                            <span class="tag">Health</span>
-                            <span class="tag">Public Awareness</span>
+                            <span>Infographic</span>
+                            <span>Health</span>
+                            <span>Public Awareness</span>
                         </div>
-                        <h3 class="project-title">The Hidden Truth of Ultra-Processed Foods</h3>
-                        <p class="project-description">
-                            An eye-opening infographic revealing the hidden dangers of ultra-processed foods in our modern diet. Explores nutrition science, health impacts, and the prevalence of processed ingredients in everyday meals—designed to raise public awareness about food choices.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-file"></i> Infographic Design</span>
+                        <div class="project-links">
+                            <a href="Assignments/Assignment-3.pdf" class="btn-link" target="_blank">View PDF →</a>
                         </div>
-                        <a href="Assignments/Assignment-3.pdf" class="btn-view" target="_blank">View PDF</a>
-                        <a href="Assignments/Assignment-3.pdf" class="btn-view" target="_blank" download style="background: var(--dark-bg); margin-top: 0.5rem;">Download PDF</a>
-                    </div>
-                </div>
-
-                <!-- Project 4: Interactive Sales Dashboard -->
-                <div class="project-card" data-category="dashboard interactive">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80" alt="Sales Dashboard">
-                        <div class="project-overlay">
-                            <a href="projects/sales-dashboard.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">Tableau</span>
-                            <span class="tag">Business Intelligence</span>
-                            <span class="tag">KPIs</span>
-                        </div>
-                        <h3 class="project-title">Executive Sales Dashboard</h3>
-                        <p class="project-description">
-                            Interactive executive dashboard providing real-time insights into sales performance, revenue trends, and regional metrics. Features drill-down capabilities and predictive analytics for strategic decision-making.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-chart-bar"></i> Dashboard</span>
-                        </div>
-                        <a href="projects/sales-dashboard.html" class="btn-view">View Project</a>
-                    </div>
-                </div>
-
-                <!-- Project 5: Customer Segmentation Analysis -->
-                <div class="project-card" data-category="interactive dashboard">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80" alt="Customer Segmentation">
-                        <div class="project-overlay">
-                            <a href="projects/customer-segmentation.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Machine Learning</span>
-                            <span class="tag">Clustering</span>
-                        </div>
-                        <h3 class="project-title">Customer Segmentation Analysis</h3>
-                        <p class="project-description">
-                            Advanced clustering analysis using K-means and hierarchical methods to identify distinct customer segments. Includes interactive visualizations of behavioral patterns and actionable business recommendations.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-brain"></i> ML Analysis</span>
-                        </div>
-                        <a href="projects/customer-segmentation.html" class="btn-view">View Project</a>
-                    </div>
-                </div>
-
-                <!-- Project 6: Time Series Forecasting -->
-                <div class="project-card" data-category="interactive dashboard">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&h=500&fit=crop" alt="Time Series Analysis">
-                        <div class="project-overlay">
-                            <a href="projects/time-series.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">R</span>
-                            <span class="tag">Forecasting</span>
-                            <span class="tag">ARIMA</span>
-                        </div>
-                        <h3 class="project-title">Demand Forecasting Model</h3>
-                        <p class="project-description">
-                            Comprehensive time series analysis implementing ARIMA, Prophet, and LSTM models for demand forecasting. Features seasonality decomposition, trend analysis, and confidence interval visualization.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-chart-line"></i> Predictive</span>
-                        </div>
-                        <a href="projects/time-series.html" class="btn-view">View Project</a>
-                    </div>
-                </div>
-
-                <!-- Project 7: Network Analysis -->
-                <div class="project-card" data-category="interactive">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=500&fit=crop" alt="Network Visualization">
-                        <div class="project-overlay">
-                            <a href="projects/network-analysis.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">D3.js</span>
-                            <span class="tag">Graph Theory</span>
-                            <span class="tag">Network</span>
-                        </div>
-                        <h3 class="project-title">Social Network Analysis</h3>
-                        <p class="project-description">
-                            Interactive network visualization using D3.js to map relationships and influence patterns. Implements force-directed layouts, community detection algorithms, and centrality metrics for network insights.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-project-diagram"></i> Graph Analysis</span>
-                        </div>
-                        <a href="projects/network-analysis.html" class="btn-view">View Project</a>
-                    </div>
-                </div>
-
-                <!-- Project 8: Geospatial COVID Analysis -->
-                <div class="project-card" data-category="geospatial interactive">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1584036561584-b03c19da874c?w=800&h=600&fit=crop&q=80" alt="COVID Geospatial">
-                        <div class="project-overlay">
-                            <a href="projects/covid-analysis.html" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">GIS</span>
-                            <span class="tag">Public Health</span>
-                            <span class="tag">Choropleth</span>
-                        </div>
-                        <h3 class="project-title">COVID-19 Geospatial Impact Analysis</h3>
-                        <p class="project-description">
-                            Multi-layered geospatial analysis tracking COVID-19 spread patterns across regions. Features choropleth maps, temporal animations, and comparative visualizations of public health interventions.
-                        </p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-map-marked-alt"></i> GIS Analysis</span>
-                        </div>
-                        <a href="projects/covid-analysis.html" class="btn-view">View Project</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Technical Toolbox</h2>
-            <p class="section-subtitle">Technologies and tools I use to bring data stories to life</p>
+            <h2 class="section-title">Skills & Tools</h2>
             
             <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-chart-bar"></i> Visualization</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python (Matplotlib, Seaborn, Plotly)</span>
-                        <span class="skill-tag">Altair</span>
-                        <span class="skill-tag">Tableau</span>
-                        <span class="skill-tag">Power BI</span>
-                        <span class="skill-tag">D3.js</span>
-                        <span class="skill-tag">Folium</span>
-                    </div>
+                <div class="skill-group">
+                    <h3>Visualization</h3>
+                    <p>Python (Matplotlib, Seaborn, Plotly, Altair), Tableau, Power BI, D3.js, Folium</p>
                 </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Data Engineering</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Snowflake</span>
-                        <span class="skill-tag">Azure Data Factory</span>
-                        <span class="skill-tag">Apache Airflow</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">ETL Pipelines</span>
-                    </div>
+                <div class="skill-group">
+                    <h3>Data Engineering</h3>
+                    <p>Snowflake, Azure Data Factory, Apache Airflow, SQL, ETL Pipelines</p>
                 </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">R</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">NumPy</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                    </div>
+                <div class="skill-group">
+                    <h3>Programming</h3>
+                    <p>Python, R, JavaScript, Pandas, NumPy, Scikit-learn</p>
                 </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> Analytics & ML</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Machine Learning</span>
-                        <span class="skill-tag">Statistical Analysis</span>
-                        <span class="skill-tag">Predictive Modeling</span>
-                        <span class="skill-tag">A/B Testing</span>
-                        <span class="skill-tag">Time Series</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Jupyter</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Azure</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">VS Code</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Data Storytelling</span>
-                        <span class="skill-tag">Stakeholder Communication</span>
-                        <span class="skill-tag">Business Intelligence</span>
-                        <span class="skill-tag">Project Management</span>
-                    </div>
+                <div class="skill-group">
+                    <h3>Analytics</h3>
+                    <p>Machine Learning, Statistical Analysis, Predictive Modeling, Time Series</p>
                 </div>
             </div>
         </div>
@@ -410,46 +147,15 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="section-subtitle">Interested in collaboration or have a project in mind? I'd love to hear from you!</p>
-            
+            <h2 class="section-title">Get In Touch</h2>
             <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>nikhil.korrapati@example.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <div>
-                            <h3>LinkedIn</h3>
-                            <p><a href="https://linkedin.com/in/nikhilkorrapati" target="_blank">linkedin.com/in/nikhilkorrapati</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <div>
-                            <h3>GitHub</h3>
-                            <p><a href="https://github.com/NikhilKumarKorrapati" target="_blank">github.com/NikhilKumarKorrapati</a></p>
-                        </div>
-                    </div>
-                </div>
-
+                <p>nikhil.korrapati@example.com</p>
                 <div class="social-links">
-                    <a href="https://github.com/NikhilKumarKorrapati" target="_blank" class="social-link">
-                        <i class="fab fa-github"></i>
+                    <a href="https://github.com/NikhilKumarKorrapati" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
                     </a>
-                    <a href="https://linkedin.com/in/nikhilkorrapati" target="_blank" class="social-link">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="mailto:nikhil.korrapati@example.com" class="social-link">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://twitter.com/nikhilkorrapati" target="_blank" class="social-link">
-                        <i class="fab fa-twitter"></i>
+                    <a href="https://linkedin.com/in/nikhilkorrapati" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
                 </div>
             </div>
@@ -459,8 +165,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Nikhil Kumar Korrapati. All rights reserved.</p>
-            <p>Built with <i class="fas fa-heart"></i> for data storytelling</p>
+            <p>&copy; 2024 Nikhil Kumar Korrapati</p>
         </div>
     </footer>
 
