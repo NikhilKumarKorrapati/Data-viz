@@ -39,14 +39,12 @@ body {
     color: var(--dark);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    text-align: left;
 }
 
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 24px;
-    text-align: left;
 }
 
 /* ==================== NAVBAR ==================== */
